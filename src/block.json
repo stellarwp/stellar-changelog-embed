@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "stellarwp/text-file-embed",
+    "version": "0.1.0",
+    "title": "Stellar Text File Embed",
+    "category": "widgets",
+    "icon": "smiley",
+    "description": "Example block scaffolded with Create Block tool.",
+    "example": {},
+    "supports": {
+        "html": false
+    },
+    "keywords": [
+        "64756b"
+    ],
+    "attributes": {
+        "textFileUrl": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "01-block-dynamic",
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}
