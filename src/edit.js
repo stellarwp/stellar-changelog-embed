@@ -5,6 +5,7 @@
  */
 import { InspectorControls } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
+import { serverSideRender } from '@wordpress/server-side-render';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -13,8 +14,6 @@ import { TextControl } from '@wordpress/components';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps } from '@wordpress/block-editor';
-
-const { serverSideRender: ServerSideRender } = wp;
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -29,16 +28,20 @@ export default function Edit(props) {
 
   return (
 		<div { ...useBlockProps() } >
-			<ServerSideRender block="stellarwp/text-file-embed" attributes={attributes} />
-
 			<InspectorControls>
-				<TextControl
-					label="Text File URL"
-					value={attributes.textFileUrl}
-					onChange={(newUrl) => setAttributes({ textFileUrl: newUrl })}
-					help="Enter the URL of the .txt file you want to display."
-				/>
+				<div className="block-editor-block-card">
+					<TextControl
+						label="Changelog URL"
+						value={attributes.changelogUrl}
+						onChange={(newUrl) => setAttributes({ changelogUrl: newUrl })}
+						help="Enter the URL of the changelog file you want to display."
+					/>
+				</div>
 			</InspectorControls>
+
+			<div style={{ backgroundColor: '#f0f0f0', border: '1px solid #000', padding: '1rem' }}>
+				Changelog Embed
+			</div>
 		</div>
 	);
 }

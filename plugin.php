@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Stellar Text Embed Block
- * Description: A block that displays the content of a text file from a user-specified URL.
+ * Plugin Name: Stellar Changelog Embed
+ * Description: A block that displays the contents of a changelog file from a user-specified URL.
  * Version: 1.0
  * Author: StellarWP
  * License: GPLv2 or later
@@ -22,15 +22,15 @@ add_action( 'init', 'swp_text_file_block_register' );
 // Server-side rendering of the block
 function swp_text_file_block_render( $attributes ) {
 	// Get the URL from the block attributes
-	$text_file_url = isset( $attributes['textFileUrl'] ) ? esc_url_raw( $attributes['textFileUrl'] ) : '';
+	$changelog_url = isset( $attributes['changelogUrl'] ) ? esc_url_raw( $attributes['changelogUrl'] ) : '';
 
 	// If no URL is provided, display a message
-	if ( empty( $text_file_url ) ) {
+	if ( empty( $changelog_url ) ) {
 		return '';
 	}
 
 	// Fetch the contents of the text file
-	$response = wp_remote_get( $text_file_url );
+	$response = wp_remote_get( $changelog_url );
 
 	if ( is_wp_error( $response ) ) {
 		return '';

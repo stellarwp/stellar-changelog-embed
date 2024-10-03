@@ -1,2 +1,3 @@
-# stellar-text-embed-block
-A simple plugin for embedding a .txt file as a block
+# StellarWP Changelog Embed
+
+A simple block for embedding a changelog text file as content.
