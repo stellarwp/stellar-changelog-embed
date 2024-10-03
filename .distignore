@@ -1,0 +1,11 @@
+bin/
+node_modules/
+.distignore
+.gitignore
+.nvmrc
+.puprc
+bun.lockb
+composer.json
+composer.lock
+package.json
+package-lock.json
