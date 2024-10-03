@@ -1,12 +1,12 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "stellarwp/text-file-embed",
+    "name": "stellarwp/changelog-embed",
     "version": "0.1.0",
-    "title": "Stellar Text File Embed",
-    "category": "widgets",
-    "icon": "smiley",
-    "description": "Example block scaffolded with Create Block tool.",
+    "title": "Stellar Changelog Embed",
+    "category": "embed",
+    "icon": "text",
+    "description": "Embed a changelog text file as content.",
     "example": {},
     "supports": {
         "html": false
@@ -15,11 +15,11 @@
         "64756b"
     ],
     "attributes": {
-        "textFileUrl": {
+        "changelogUrl": {
             "type": "string",
             "default": ""
         }
     },
-    "textdomain": "01-block-dynamic",
+    "textdomain": "stellarwp-changelog-embed",
     "editorScript": "file:./index.js"
 }

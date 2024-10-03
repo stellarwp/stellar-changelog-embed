@@ -19,8 +19,4 @@ import metadata from './block.json';
 
 registerBlockType(metadata.name, {
 	edit: Edit,
-	save: function () {
-		// Server-rendered block, so save function is not needed
-		return null;
-	},
 });

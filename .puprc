@@ -1,0 +1,24 @@
+{
+	"build": [
+		"rm -rf vendor",
+		"composer install --no-dev -o",
+		"bun install",
+		"bun run build"
+	],
+	"build_dev": [
+		"rm -rf vendor",
+		"composer install -o",
+		"bun install",
+		"bun run build"
+	],
+	"paths": {
+		"versions": [
+			{
+				"file": "plugin.php",
+				"regex": "\\* (Version: +)(.+)"
+			}
+		]
+	},
+	"repo_url": "https://github.com/stellarwp/stellar-changelog-embed",
+	"zip_name": "stellar-changelog-embed"
+}
