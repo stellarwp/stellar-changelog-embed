@@ -2,11 +2,13 @@
 	"build": [
 		"rm -rf vendor",
 		"composer install --no-dev -o",
+		"bun install",
 		"bun run build"
 	],
 	"build_dev": [
 		"rm -rf vendor",
 		"composer install -o",
+		"bun install",
 		"bun run build"
 	],
 	"paths": {
