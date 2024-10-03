@@ -1,0 +1,18 @@
+{
+    "name": "stellarwp/stellar-changelog-embed",
+    "description": "Embed a changelog text file as content.",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "autoload": {
+        "psr-4": {
+            "StellarWP\\ChangelogEmbed\\": "src/ChangelogEmbed/"
+        }
+    },
+    "require": {},
+    "scripts": {
+        "pup": [
+            "sh -c 'test -f ./bin/pup.phar || curl -o bin/pup.phar -L -C - https://github.com/stellarwp/pup/releases/download/1.3.7/pup.phar'",
+            "@php ./bin/pup.phar"
+        ]
+    }
+}
