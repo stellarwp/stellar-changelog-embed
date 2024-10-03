@@ -9,52 +9,49 @@
 
 // Register the block and enqueue the block JavaScript
 function swp_text_file_block_register() {
-	/*
-	// Enqueue the block editor JavaScript
-	wp_register_script(
-		'swp-text-file-embed',
-		plugins_url( 'block.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-editor', 'wp-element', 'wp-components' ),
-		filemtime( plugin_dir_path( __FILE__ ) . 'block.js' )
+	register_block_type(
+		__DIR__ . '/build',
+		[
+			'render_callback' => 'swp_text_file_block_render',
+		]
 	);
-
-	// Register the block
-	register_block_type( 'stellarwp/text-file-embed', array(
-		'editor_script'   => 'swp-text-file-embed',
-		'render_callback' => 'swp_text_file_block_render',
-		'category'        => 'embed',
-		'attributes'      => array(
-			'textFileUrl' => array(
-				'type'    => 'string',
-				'default' => ''
-			),
-		),
-	) );
-	 */
-	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'swp_text_file_block_register' );
 
+add_action( 'init', 'swp_text_file_block_register' );
 
 // Server-side rendering of the block
 function swp_text_file_block_render( $attributes ) {
-    // Get the URL from the block attributes
-    $text_file_url = isset( $attributes['textFileUrl'] ) ? esc_url_raw( $attributes['textFileUrl'] ) : '';
+	// Get the URL from the block attributes
+	$text_file_url = isset( $attributes['textFileUrl'] ) ? esc_url_raw( $attributes['textFileUrl'] ) : '';
 
-    // If no URL is provided, display a message
-    if ( empty( $text_file_url ) ) {
-        return '<div>No URL provided.</div>';
-    }
+	// If no URL is provided, display a message
+	if ( empty( $text_file_url ) ) {
+		return '';
+	}
 
-    // Fetch the contents of the text file
-    $response = wp_remote_get( $text_file_url );
+	// Fetch the contents of the text file
+	$response = wp_remote_get( $text_file_url );
 
-    if ( is_wp_error( $response ) ) {
-        return '<div>Error fetching the text file.</div>';
-    }
+	if ( is_wp_error( $response ) ) {
+		return '';
+	}
 
-    $body = wp_remote_retrieve_body( $response );
+	$body = wp_remote_retrieve_body( $response );
 
-    // Return the contents of the text file
-    return '<pre>' . esc_html( $body ) . '</pre>';
+	// Replace each backtick-enclosed text with a <code> tag.
+	$body = preg_replace('/`([^`]+)`/', '<code>$1</code>', $body );
+
+	// Replace each asterisk at the beginning of a line with a list item <li>.
+	$body = preg_replace('/^\* (.+)/m', '<li>$1</li>', $body);
+
+	// TODO: The following list of regular expressions does not map the file properly.
+
+	// Add <ul> before and after the list items within a version block.
+	$body = preg_replace('/= \[(\d+\.\d+\.\d+)\] =/', "\n</ul>\n<h3>$1</h3>\n<ul>", $body);
+
+	// Ensure that any unclosed <ul> tags are properly closed at the end.
+	$body = preg_replace('/(<\/li>\n*)*(?=\n= \[\d+\.\d+\.\d+\] =|\Z)/', "\n</ul>", $body);
+
+	// Return the contents of the text file.
+	return '<pre>' . wp_kses_post( $body ) . '</pre>';
 }

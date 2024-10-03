@@ -21,6 +21,5 @@
         }
     },
     "textdomain": "01-block-dynamic",
-    "editorScript": "file:./index.js",
-    "render": "file:./render.php"
+    "editorScript": "file:./index.js"
 }
