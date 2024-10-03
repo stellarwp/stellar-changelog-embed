@@ -41,6 +41,7 @@ export default function Edit(props) {
 
 			<div style={{ backgroundColor: '#f0f0f0', border: '1px solid #000', padding: '1rem' }}>
 				Changelog Embed
+				<div>{attributes.changelogUrl}</div>
 			</div>
 		</div>
 	);
