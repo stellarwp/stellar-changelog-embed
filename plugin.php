@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Stellar Changelog Embed
  * Description: A block that displays the contents of a changelog file from a user-specified URL.
- * Version: 1.0
+ * Version: 1.0.0
  * Author: StellarWP
  * License: GPLv2 or later
  */
