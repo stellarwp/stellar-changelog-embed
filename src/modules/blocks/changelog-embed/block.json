@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "title": "Stellar Changelog Embed",
     "category": "embed",
-    "icon": "smiley",
+    "icon": "text",
     "description": "Embed a changelog text file as content.",
     "example": {},
     "supports": {
