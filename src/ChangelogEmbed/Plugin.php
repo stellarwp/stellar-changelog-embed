@@ -42,7 +42,7 @@ class Plugin {
 	 * @since 1.0.0
 	 *
 	 * @param array $attributes The block attributes.
-	 * @return void
+	 * @return string|\WP_Error
 	 */
 	public function render( $attributes ) {
 		// Get the URL from the block attributes

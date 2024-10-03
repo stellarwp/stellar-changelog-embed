@@ -5,7 +5,6 @@
  */
 import { InspectorControls } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
-import { serverSideRender } from '@wordpress/server-side-render';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -14,6 +13,8 @@ import { serverSideRender } from '@wordpress/server-side-render';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps } from '@wordpress/block-editor';
+
+const { serverSideRender: ServerSideRender } = wp;
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -43,6 +44,8 @@ export default function Edit(props) {
 				Changelog Embed
 				<div>{attributes.changelogUrl}</div>
 			</div>
+
+			<ServerSideRender block="stellarwp/changelog-embed" attributes={attributes} />
 		</div>
 	);
 }
