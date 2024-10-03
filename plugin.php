@@ -41,16 +41,14 @@ function swp_text_file_block_render( $attributes ) {
 	// Replace each backtick-enclosed text with a <code> tag.
 	$body = preg_replace('/`([^`]+)`/', '<code>$1</code>', $body );
 
+	// Make headings <h3> tags.
+	$body = preg_replace('/= \[(\d+\.\d+\.\d+)\] =/', "\n<h3>$1</h3>", $body);
+
 	// Replace each asterisk at the beginning of a line with a list item <li>.
 	$body = preg_replace('/^\* (.+)/m', '<li>$1</li>', $body);
 
-	// TODO: The following list of regular expressions does not map the file properly.
-
-	// Add <ul> before and after the list items within a version block.
-	$body = preg_replace('/= \[(\d+\.\d+\.\d+)\] =/', "\n</ul>\n<h3>$1</h3>\n<ul>", $body);
-
-	// Ensure that any unclosed <ul> tags are properly closed at the end.
-	$body = preg_replace('/(<\/li>\n*)*(?=\n= \[\d+\.\d+\.\d+\] =|\Z)/', "\n</ul>", $body);
+	// Wrap all groups of list items in an unordered list <ul>.
+	$body = preg_replace('/(<li>.+<\/li>\n)+/', '<ul>$0</ul>', $body);
 
 	// Return the contents of the text file.
 	return '<pre>' . wp_kses_post( $body ) . '</pre>';
