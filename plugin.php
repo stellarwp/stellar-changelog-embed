@@ -51,5 +51,5 @@ function swp_text_file_block_render( $attributes ) {
 	$body = preg_replace('/(<li>.+<\/li>\n)+/', '<ul>$0</ul>', $body);
 
 	// Return the contents of the text file.
-	return '<pre>' . wp_kses_post( $body ) . '</pre>';
+	return wp_kses_post( $body );
 }
