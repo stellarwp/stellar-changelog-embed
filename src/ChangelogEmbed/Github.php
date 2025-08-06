@@ -16,7 +16,7 @@ use WP_Error;
  *
  * @since 2.0.0
  */
-class GitHub_API {
+class Github {
 	/**
 	 * GitHub API base URL.
 	 *
@@ -51,15 +51,6 @@ class GitHub_API {
 				'missing_params',
 				__( 'Missing required parameters for GitHub API request.', 'stellar-changelog-embed' )
 			);
-		}
-
-		// Create cache key.
-		$cache_key = 'stellar_changelog_embed_' . md5( $owner . '_' . $repo . '_' . $file_path . '_' . $branch );
-
-		// Check for cached content.
-		$cached_content = get_transient( $cache_key );
-		if ( false !== $cached_content ) {
-			return $cached_content;
 		}
 
 		// Build request URL.
@@ -97,7 +88,6 @@ class GitHub_API {
 		}
 
 		// Check response code.
-
 		$response_code = wp_remote_retrieve_response_code( $response );
 
 		if ( 200 !== $response_code ) {
@@ -111,65 +101,7 @@ class GitHub_API {
 			);
 		}
 
-		// Get response body.
-		$content = wp_remote_retrieve_body( $response );
-
-		// Cache the result with configurable duration.
-		set_transient( $cache_key, $content, $this->get_cache_duration() );
-
-		return $content;
+		// Return the response body.
+		return wp_remote_retrieve_body( $response );
 	}
-
-	/**
-	 * Clears the plugin's cache.
-	 * 
-	 * TODO: Test it later.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return int Number of cache items cleared.
-	 */
-	public function clear_cache(): int {
-		global $wpdb;
-
-		// Get all matching transients.
-		$transients = $wpdb->get_col(
-			$wpdb->prepare(
-				"SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s",
-				'_transient_stellar_changelog_embed_%'
-			)
-		);
-
-		$count = 0;
-
-		// Delete each transient using WordPress API for compatibility.
-		foreach ( $transients as $transient ) {
-			$transient_name = str_replace( '_transient_', '', $transient );
-			if ( delete_transient( $transient_name ) ) {
-				$count++;
-			}
-		}
-
-		return $count;
-	}
-
-	/**
-	 * Gets the current cache duration.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return int Cache duration in seconds.
-	 */
-	public function get_cache_duration(): int {
-		/**
-		 * Filters the cache duration.
-		 *
-		 * @since 2.0.0
-		 *
-		 * @param int $default_cache_duration The default cache duration in seconds. Default is 1 hour.
-		 *
-		 * @return int Cache duration in seconds.
-		 */
-		return apply_filters( 'wp_changelog_viewer_cache_duration', HOUR_IN_SECONDS );
-	}
-}
+} 
