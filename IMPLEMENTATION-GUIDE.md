@@ -1,6 +1,6 @@
-# Stellar Changelog Embed Implementation Guide
+# StellarWP Changelog Embed Implementation Guide
 
-This guide provides detailed instructions for implementing, customizing, and extending the Stellar Changelog Embed plugin.
+This guide provides detailed instructions for implementing, customizing, and extending the StellarWP Changelog Embed plugin.
 
 ## Installation and Setup
 
@@ -43,7 +43,7 @@ To avoid rate limiting and access private repositories:
    - Generate a new token with the `repo` scope
 
 2. Add the token to the plugin:
-   - Go to WordPress admin > Settings > Stellar Changelog Embed
+   - Go to WordPress admin > Settings > StellarWP Changelog Embed
    - Paste your GitHub token
    - Save changes
 
@@ -51,7 +51,7 @@ To avoid rate limiting and access private repositories:
 
 ### Processing Flow
 
-1. User inserts Stellar Changelog Embed block and configures repo details
+1. User inserts StellarWP Changelog Embed block and configures repo details
 2. Plugin saves these settings as block attributes
 3. When page loads, plugin:
    - Fetches changelog file from GitHub (using cached version if available)
@@ -64,7 +64,7 @@ To avoid rate limiting and access private repositories:
 - GitHub API responses are cached using WordPress transients
 - Default cache duration: 1 hour
 - Cache key format: `stellar_changelog_embed_[MD5_HASH]`
-- Cache can be manually cleared from Settings > Stellar Changelog Embed
+- Cache can be manually cleared from Settings > StellarWP Changelog Embed
 
 ### Block Implementation
 

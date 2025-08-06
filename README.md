@@ -1,4 +1,4 @@
-# Stellar Changelog Embed
+# StellarWP Changelog Embed
 
 A WordPress plugin that allows you to display changelogs from your GitHub repositories in a clean, organized format using a Gutenberg block.
 
@@ -17,13 +17,13 @@ A WordPress plugin that allows you to display changelogs from your GitHub reposi
 
 1. Upload the `stellar-changelog-embed` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Add a Stellar Changelog Embed block to any post or page
+3. Add a StellarWP Changelog Embed block to any post or page
 
 ## Usage
 
 ### Using the Block
 
-1. Add a "Stellar Changelog Embed" block to your post or page
+1. Add a "StellarWP Changelog Embed" block to your post or page
 2. In the block settings, enter:
    - Repository Owner (GitHub username or organization)
    - Repository Name
@@ -36,7 +36,7 @@ A WordPress plugin that allows you to display changelogs from your GitHub reposi
 
 To avoid GitHub API rate limits or to access private repositories:
 
-1. Go to Settings > Stellar Changelog Embed
+1. Go to Settings > StellarWP Changelog Embed
 2. Enter your GitHub Personal Access Token
 3. Save Changes
 
