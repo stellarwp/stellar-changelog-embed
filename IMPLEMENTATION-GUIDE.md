@@ -63,7 +63,7 @@ To avoid rate limiting and access private repositories:
 
 - GitHub API responses are cached using WordPress transients
 - Default cache duration: 1 hour
-- Cache key format: `wp_changelog_viewer_[MD5_HASH]`
+- Cache key format: `stellar_changelog_embed_[MD5_HASH]`
 - Cache can be manually cleared from Settings > Changelog Viewer
 
 ### Block Implementation
@@ -82,15 +82,15 @@ The parser automatically detects change types from the format `* Type - Descript
 
 1. Add CSS styles for the new types in `assets/css/changelog-viewer.css`:
    ```css
-   .changelog-section[data-type="YourType"] .changelog-section-header {
+   .stellar-changelog-embed__section[data-type="YourType"] .stellar-changelog-embed__section-header {
        background-color: #your-color;
    }
    
-   .changelog-section[data-type="YourType"] .changelog-section-title {
+   .stellar-changelog-embed__section[data-type="YourType"] .stellar-changelog-embed__section-title {
        color: #your-text-color;
    }
    
-   .changelog-section[data-type="YourType"] .changelog-section-count {
+   .stellar-changelog-embed__section[data-type="YourType"] .stellar-changelog-embed__section-count {
        background-color: #your-lighter-color;
        color: #your-darker-color;
    }
@@ -109,7 +109,7 @@ To create a completely custom template:
 
 2. Add a filter to WordPress to use your custom template:
    ```php
-   add_filter( 'wp_changelog_viewer_template_path', function( $template_path ) {
+   add_filter( 'stellar_changelog_embed_template_path', function( $template_path ) {
        $custom_template = get_stylesheet_directory() . '/stellar-changelog-embed/changelog.php';
        if ( file_exists( $custom_template ) ) {
            return $custom_template;
@@ -118,8 +118,9 @@ To create a completely custom template:
    } );
    ```
 
-3. Customize your template file. The template has access to:
+3. Customize your template file. The template uses BEM CSS methodology with the `stellar-changelog-embed` block and has access to:
    - `$changelog_data`: Array of parsed changelog entries
+   - CSS classes follow BEM structure: `stellar-changelog-embed__element--modifier`
 
 ### JavaScript Event Hooks
 
@@ -127,15 +128,49 @@ The frontend JavaScript triggers custom events you can hook into:
 
 ```javascript
 // Listen for when a changelog version is expanded
-jQuery(document).on('changelog_version_expanded', function(event, versionData) {
+jQuery(document).on('stellar_changelog_embed_version_expanded', function(event, versionData) {
     console.log('Version expanded:', versionData.version);
 });
 
 // Listen for when a changelog version is collapsed
-jQuery(document).on('changelog_version_collapsed', function(event, versionData) {
+jQuery(document).on('stellar_changelog_embed_version_collapsed', function(event, versionData) {
     console.log('Version collapsed:', versionData.version);
 });
 ```
+
+### CSS Class Structure
+
+The plugin uses BEM (Block Element Modifier) methodology for CSS classes:
+
+- **Block**: `stellar-changelog-embed` (main container)
+- **Elements**: `stellar-changelog-embed__element` (using double underscores)
+- **Modifiers**: `stellar-changelog-embed__element--modifier` (using double hyphens)
+
+Key CSS classes:
+- `.stellar-changelog-embed__header` - Main header section
+- `.stellar-changelog-embed__version` - Individual version container
+- `.stellar-changelog-embed__version-header` - Version header with toggle
+- `.stellar-changelog-embed__section` - Change type sections (Fix, Feature, etc.)
+- `.stellar-changelog-embed__pagination` - Pagination controls
+- `.stellar-changelog-embed__version-tag--latest` - Latest version indicator
+- `.stellar-changelog-embed__pagination-btn--active` - Active page button
+
+### Hook Naming Convention
+
+The plugin uses a consistent naming convention for all hooks and events:
+
+- **PHP Filters/Actions**: `stellar_changelog_embed_*`
+- **JavaScript Events**: `stellar_changelog_embed_*`
+- **Cache Keys**: `stellar_changelog_embed_*`
+- **Class Names**: `Stellar_Changelog_Embed_*`
+
+Available hooks:
+- `stellar_changelog_embed_template_path` - Customize template path
+- `stellar_changelog_embed_default_branch` - Change default branch
+- `stellar_changelog_embed_parser` - Custom parser class
+- `stellar_changelog_embed_cache_duration` - Cache duration
+- `stellar_changelog_embed_version_expanded` - JavaScript event
+- `stellar_changelog_embed_version_collapsed` - JavaScript event
 
 ## Integration with Other Plugins
 
@@ -147,13 +182,13 @@ If you're using GitHub to host your plugins and want auto-updates:
 2. Set up GitHub Updater with the same repository details
 3. This plugin will automatically display the latest changes when updates are available
 
-### Integration with WooCommerce
+### Integration Examples
 
-If you sell plugins/themes via WooCommerce:
+The changelog embed block can be used anywhere WordPress supports blocks:
 
-1. Add the changelog block to your product description
+1. Add the changelog block to any post, page, or custom post type
 2. Configure it to point to your GitHub repository
-3. Customers will always see up-to-date changelog info
+3. Display up-to-date changelog information anywhere on your site
 
 ## Common Code Modifications
 
@@ -163,7 +198,7 @@ To change the default branch from "main" to something else:
 
 ```php
 // Add to your theme's functions.php.
-add_filter( 'wp_changelog_viewer_default_branch', function() {
+add_filter( 'stellar_changelog_embed_default_branch', function() {
     return 'master'; // Or any other branch name.
 } );
 ```
@@ -172,12 +207,12 @@ add_filter( 'wp_changelog_viewer_default_branch', function() {
 
 To support a different changelog format:
 
-1. Create a custom parser class that extends `WP_Changelog_Viewer_Parser`.
+1. Create a custom parser class that extends `Stellar_Changelog_Embed_Parser`.
 2. Override the `parse()` method with your custom logic.
 3. Replace the default parser with your custom one:
 
 ```php
-add_filter( 'wp_changelog_viewer_parser', function() {
+add_filter( 'stellar_changelog_embed_parser', function() {
     return new Your_Custom_Parser();
 } );
 ```
@@ -197,7 +232,7 @@ function changelog_viewer_shortcode( $atts ) {
         'max_versions' => 5,
     ], $atts );
     
-    return WP_Changelog_Viewer::render_block( $attributes );
+    return Stellar_Changelog_Embed::render_block( $attributes );
 }
 add_shortcode( 'changelog_viewer', 'changelog_viewer_shortcode' );
 ```
@@ -215,7 +250,7 @@ add_shortcode( 'changelog_viewer', 'changelog_viewer_shortcode' );
 - Use browser caching for CSS/JS files (configure in your web server)
 - Consider increasing the cache duration for changelog data:
   ```php
-  add_filter( 'wp_changelog_viewer_cache_duration', function() {
+  add_filter( 'stellar_changelog_embed_cache_duration', function() {
       return DAY_IN_SECONDS; // Cache for 24 hours.
   } );
   ```

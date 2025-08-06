@@ -98,7 +98,7 @@ stellar-changelog-embed/
 - **class-api.php**: Registers REST API endpoints
 - **index.js**: Block editor implementation
 - **frontend.js**: Frontend interaction handling
-- **changelog-display.php**: View template for rendering the changelog
+- **src/views/changelog.php**: View template for rendering the changelog (uses BEM CSS classes)
 
 ### Building the JavaScript
 
@@ -112,9 +112,18 @@ This plugin uses @wordpress/scripts for building:
 
 ### CSS Customization
 
-The plugin includes styling that should work with most themes. If you need to customize the appearance, you can:
+The plugin includes styling that should work with most themes. The CSS uses BEM methodology with the `stellar-changelog-embed` block. If you need to customize the appearance, you can:
 
-1. Add custom CSS to your theme
+1. Add custom CSS to your theme targeting the BEM classes:
+   ```css
+   .stellar-changelog-embed__version-header {
+       /* Custom styles for version headers */
+   }
+   
+   .stellar-changelog-embed__section[data-type="Feature"] {
+       /* Custom styles for feature sections */
+   }
+   ```
 2. Or edit the `assets/css/changelog-viewer.css` file directly
 
 ### Template Customization
@@ -122,7 +131,10 @@ The plugin includes styling that should work with most themes. If you need to cu
 To customize the HTML output:
 
 1. Copy `src/views/changelog.php` to your theme folder under `my-theme/stellar-changelog-embed/changelog.php`
-2. Edit the template as needed
+2. Edit the template as needed. The template uses BEM CSS classes for styling:
+   - Main container: `stellar-changelog-embed`
+   - Elements: `stellar-changelog-embed__element`
+   - Modifiers: `stellar-changelog-embed__element--modifier`
 
 ## Troubleshooting
 
