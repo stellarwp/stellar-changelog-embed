@@ -75,7 +75,7 @@ class Cache {
 	/**
 	 * Clears all plugin cache.
 	 *
-	 * TODO: Test it later.
+	 * TODO: This is incompatible with WP_Object_Cache, which some sites may use vs the DB for transients.
 	 *
 	 * @since 2.0.0
 	 *

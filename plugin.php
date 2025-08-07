@@ -18,6 +18,12 @@ define( 'STELLAR_CHANGELOG_EMBED_DIR', __DIR__ );
 add_action(
 	'init',
 	static function () {
+		// TODO: Set up a proper ServiceProvider.
+
 		Plugin::instance()->register();
+
+		Settings::instance()->hooks();
+
+		API::instance()->hooks();
 	}
 );

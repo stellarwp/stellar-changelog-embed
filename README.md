@@ -38,8 +38,7 @@ To avoid GitHub API rate limits or to access private repositories:
 
 1. Go to Settings > StellarWP Changelog Embed
 2. Enter your GitHub Personal Access Token
-    - TODO: Confirm permissions necessary.
-4. Save Changes
+3. Save Changes
 
 ## Changelog Format
 

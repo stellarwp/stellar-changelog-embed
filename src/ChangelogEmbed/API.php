@@ -16,6 +16,34 @@ namespace StellarWP\ChangelogEmbed;
  */
 class API {
 	/**
+	 * Register hooks.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return void
+	 */
+	public function hooks(): void {
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+	}
+
+	/**
+	 * Instance of the plugin.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return self
+	 */
+	public static function instance() {
+		static $instance = null;
+
+		if ( is_null( $instance ) ) {
+			$instance = new self();
+		}
+
+		return $instance;
+	}
+
+	/**
 	 * Registers REST API routes.
 	 *
 	 * @since 2.0.0
