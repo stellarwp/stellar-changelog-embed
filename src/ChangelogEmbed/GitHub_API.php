@@ -66,7 +66,7 @@ class GitHub_API {
 		// Set up request arguments.
 		$args = [
 			'headers' => [
-				'Accept'     => 'application/vnd.github.v3.raw',
+				'Accept'     => 'application/vnd.github.v4.raw',
 				'User-Agent' => 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' ),
 			],
 			'timeout' => 30,

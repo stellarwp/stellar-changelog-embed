@@ -15,9 +15,25 @@
         "64756b"
     ],
     "attributes": {
-        "changelogUrl": {
+        "owner": {
             "type": "string",
             "default": ""
+        },
+        "repo": {
+            "type": "string",
+            "default": ""
+        },
+        "path": {
+            "type": "string",
+            "default": ""
+        },
+        "branch": {
+            "type": "string",
+            "default": "main"
+        },
+        "max_versions": {
+            "type": "integer",
+            "default": 5
         }
     },
     "textdomain": "stellarwp-changelog-embed",
