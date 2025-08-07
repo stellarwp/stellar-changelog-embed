@@ -7,6 +7,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
+import { __ } from '@wordpress/i18n';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -23,7 +24,7 @@ export default function Edit(props) {
 	let changelogUrlInfo = null;
 
 	if ( ! attributes.changelogUrl ) {
-		changelogUrlInfo = (<span style={{ color: '#999', fontSize: '1rem' }}>Set the changelog URL in the sidebar.</span>);
+		changelogUrlInfo = (<span style={{ color: '#999', fontSize: '1rem' }}>{__("Configure in the sidebar.", "stellar-changelog-embed")}</span>);
 	} else {
 		changelogUrlInfo = (<a href={attributes.changelogUrl} target="_blank">{attributes.changelogUrl}</a>);
 	}
@@ -34,31 +35,31 @@ export default function Edit(props) {
 			<InspectorControls>
 				<div className="block-editor-block-card">
 					<TextControl
-						label="Owner"
+						label={__("Owner", "stellar-changelog-embed")}
 						value={attributes.owner}
 						onChange={(newOwner) => setAttributes({ owner: newOwner })}
 					/>
 
 					<TextControl
-						label="Repo"
+						label={__("Repo", "stellar-changelog-embed")}
 						value={attributes.repo}
 						onChange={(newRepo) => setAttributes({ repo: newRepo })}
 					/>
 
 					<TextControl
-						label="Path"
+						label={__("Path", "stellar-changelog-embed")}
 						value={attributes.path}
 						onChange={(newPath) => setAttributes({ path: newPath })}
 					/>
 
 					<TextControl
-						label="Branch"
+						label={__("Branch", "stellar-changelog-embed")}
 						value={attributes.branch}
 						onChange={(newBranch) => setAttributes({ branch: newBranch })}
 					/>
 
 					<TextControl
-						label="Max Versions"
+						label={__("Max Versions", "stellar-changelog-embed")}
 						value={attributes.max_versions}
 						onChange={(newMaxVersions) => setAttributes({ max_versions: newMaxVersions })}
 					/>
@@ -67,7 +68,7 @@ export default function Edit(props) {
 
 			<div {...blockProps}>
 				<div style={{ backgroundColor: '#f0f0f0', border: '1px solid #000', padding: '1rem' }}>
-					Changelog Embed <span style={{ color: '#999', fontSize: '0.8rem' }}>(this box is not visible in the frontend)</span>
+					{__("Changelog Embed", "stellar-changelog-embed")} <span style={{ color: '#999', fontSize: '0.8rem' }}>({__("this box is not visible in the frontend", "stellar-changelog-embed")})</span>
 					<div>{changelogUrlInfo}</div>
 				</div>
 
