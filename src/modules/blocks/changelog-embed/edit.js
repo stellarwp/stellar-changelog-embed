@@ -33,10 +33,33 @@ export default function Edit(props) {
 			<InspectorControls>
 				<div className="block-editor-block-card">
 					<TextControl
-						label="Changelog URL"
-						value={attributes.changelogUrl}
-						onChange={(newUrl) => setAttributes({ changelogUrl: newUrl })}
-						help="Enter the URL of the changelog file you want to display."
+						label="Owner"
+						value={attributes.owner}
+						onChange={(newOwner) => setAttributes({ owner: newOwner })}
+					/>
+
+					<TextControl
+						label="Repo"
+						value={attributes.repo}
+						onChange={(newRepo) => setAttributes({ repo: newRepo })}
+					/>
+
+					<TextControl
+						label="Path"
+						value={attributes.path}
+						onChange={(newPath) => setAttributes({ path: newPath })}
+					/>
+
+					<TextControl
+						label="Branch"
+						value={attributes.branch}
+						onChange={(newBranch) => setAttributes({ branch: newBranch })}
+					/>
+
+					<TextControl
+						label="Max Versions"
+						value={attributes.max_versions}
+						onChange={(newMaxVersions) => setAttributes({ max_versions: newMaxVersions })}
 					/>
 				</div>
 			</InspectorControls>

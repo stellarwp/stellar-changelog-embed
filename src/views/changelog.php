@@ -98,7 +98,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 						<div class="stellar-changelog-embed__section">
 							<h4 class="stellar-changelog-embed__section-header">
 								<span class="stellar-changelog-embed__section-title">
-									<?php echo esc_html( Stellar_Changelog_Embed::pluralize_change_type( $type ) ); ?>
+									<?php echo esc_html( $type ); ?>
 								</span>
 								<span class="stellar-changelog-embed__section-count">
 									<?php echo count( $changes ); ?>
@@ -108,7 +108,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 							<ul class="stellar-changelog-embed__changes">
 								<?php foreach ( $changes as $change ) : ?>
 									<li class="stellar-changelog-embed__change">
-										<?php echo wp_kses_post( Stellar_Changelog_Embed::process_changelog_content( $change ) ); ?>
+										<?php echo wp_kses_post( $change ); ?>
 									</li>
 								<?php endforeach; ?>
 							</ul>
