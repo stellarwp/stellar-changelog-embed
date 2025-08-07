@@ -61,34 +61,6 @@ The plugin expects changelog files in this format:
 
 For detailed implementation instructions, customization options, and technical details, see the [Implementation Guide](IMPLEMENTATION-GUIDE.md).
 
-### Plugin Structure
-
-```
-stellar-changelog-embed/
-├── assets/
-│   ├── css/
-│   │   └── changelog-viewer.css
-│   └── js/
-│       └── frontend.js
-├── build/
-│   ├── index.js (compiled)
-│   └── editor.css (compiled)
-├── includes/
-│   ├── class-github-api.php
-│   ├── class-changelog-parser.php
-│   ├── class-settings.php
-│   └── class-api.php
-├── src/
-│   ├── index.js
-│   ├── editor.css
-│   └── views/
-│       └── changelog.php
-├── plugin.php
-├── package.json
-├── webpack.config.js
-└── README.md
-```
-
 ### Key Components
 
 - **plugin.php**: Main plugin file
