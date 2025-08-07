@@ -1,7 +1,19 @@
 <?php
+/**
+ * Plugin class.
+ *
+ * @since 2.0.0
+ *
+ * @package StellarWP\ChangelogEmbed
+ */
 
 namespace StellarWP\ChangelogEmbed;
 
+/**
+ * Plugin class.
+ *
+ * @since 2.0.0
+ */
 class Plugin {
 	/**
 	 * Instance of the plugin.
@@ -45,15 +57,15 @@ class Plugin {
 	 * @return string|\WP_Error
 	 */
 	public function render( $attributes ) {
-		// Get the URL from the block attributes
+		// Get the URL from the block attributes.
 		$changelog_url = isset( $attributes['changelogUrl'] ) ? esc_url_raw( $attributes['changelogUrl'] ) : '';
 
-		// If no URL is provided, display a message
+		// If no URL is provided, display a message.
 		if ( empty( $changelog_url ) ) {
 			return '';
 		}
 
-		// Fetch the contents of the text file
+		// Fetch the contents of the text file.
 		$response = wp_remote_get( $changelog_url );
 
 		if ( is_wp_error( $response ) ) {
@@ -63,16 +75,16 @@ class Plugin {
 		$body = wp_remote_retrieve_body( $response );
 
 		// Replace each backtick-enclosed text with a <code> tag.
-		$body = preg_replace('/`([^`]+)`/', '<code>$1</code>', $body );
+		$body = preg_replace( '/`([^`]+)`/', '<code>$1</code>', $body );
 
 		// Make headings <h3> tags.
-		$body = preg_replace('/= \[(\d+\.\d+\.\d+)\] =/', "\n<h3>$1</h3>", $body);
+		$body = preg_replace( '/= \[(\d+\.\d+\.\d+)\] =/', "\n<h3>$1</h3>", $body );
 
 		// Replace each asterisk at the beginning of a line with a list item <li>.
-		$body = preg_replace('/^\* (.+)/m', '<li>$1</li>', $body);
+		$body = preg_replace( '/^\* (.+)/m', '<li>$1</li>', $body );
 
 		// Wrap all groups of list items in an unordered list <ul>.
-		$body = preg_replace('/(<li>.+<\/li>\n)+/', '<ul>$0</ul>', $body);
+		$body = preg_replace( '/(<li>.+<\/li>\n)+/', '<ul>$0</ul>', $body );
 
 		// Return the contents of the text file.
 		return wp_kses_post( $body );

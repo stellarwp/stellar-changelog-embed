@@ -74,7 +74,7 @@ class Cache {
 
 	/**
 	 * Clears all plugin cache.
-	 * 
+	 *
 	 * TODO: Test it later.
 	 *
 	 * @since 2.0.0
@@ -85,6 +85,7 @@ class Cache {
 		global $wpdb;
 
 		// Get all matching transients.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- We're intentionally clearing all matching transients.
 		$transients = $wpdb->get_col(
 			$wpdb->prepare(
 				"SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s",
@@ -98,7 +99,7 @@ class Cache {
 		foreach ( $transients as $transient ) {
 			$transient_name = str_replace( '_transient_', '', $transient );
 			if ( delete_transient( $transient_name ) ) {
-				$count++;
+				++$count;
 			}
 		}
 
@@ -137,4 +138,4 @@ class Cache {
 		 */
 		return apply_filters( 'stellar_changelog_embed_cache_duration', HOUR_IN_SECONDS );
 	}
-} 
+}

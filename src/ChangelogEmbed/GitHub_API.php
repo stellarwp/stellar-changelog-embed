@@ -16,7 +16,7 @@ use WP_Error;
  *
  * @since 2.0.0
  */
-class Github {
+class GitHub_API {
 	/**
 	 * GitHub API base URL.
 	 *
@@ -28,7 +28,7 @@ class Github {
 
 	/**
 	 * Get file content from GitHub repository.
-	 * 
+	 *
 	 * TODO: Test with public and non-public (with a token and without a token) repositories.
 	 *
 	 * @since 2.0.0
@@ -57,10 +57,10 @@ class Github {
 		$url = sprintf(
 			'%s/repos/%s/%s/contents/%s?ref=%s',
 			$this->api_base_url,
-			urlencode( $owner ),
-			urlencode( $repo ),
-			urlencode( $file_path ),
-			urlencode( $branch )
+			rawurlencode( $owner ),
+			rawurlencode( $repo ),
+			rawurlencode( $file_path ),
+			rawurlencode( $branch )
 		);
 
 		// Set up request arguments.
@@ -94,6 +94,7 @@ class Github {
 			return new WP_Error(
 				'github_api_error',
 				sprintf(
+					/* translators: %1$d: HTTP response code, %2$s: Response message */
 					__( 'GitHub API error (HTTP %1$d): %2$s', 'stellar-changelog-embed' ),
 					$response_code,
 					wp_remote_retrieve_response_message( $response )
@@ -104,4 +105,4 @@ class Github {
 		// Return the response body.
 		return wp_remote_retrieve_body( $response );
 	}
-} 
+}

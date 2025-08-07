@@ -1,7 +1,7 @@
 <?php
 /**
  * REST API Integration.
- * 
+ *
  * @since 2.0.0
  *
  * @package StellarWP\ChangelogEmbed
@@ -31,33 +31,33 @@ class API {
 				'callback'            => [ __CLASS__, 'get_changelog' ],
 				'permission_callback' => '__return_true',
 				'args'                => [
-					'owner'         => [
+					'owner'        => [
 						'required'          => true,
 						'description'       => __( 'GitHub repository owner', 'stellar-changelog-embed' ),
 						'type'              => 'string',
 						'sanitize_callback' => 'sanitize_text_field',
 					],
-					'repo'          => [
+					'repo'         => [
 						'required'          => true,
 						'description'       => __( 'GitHub repository name', 'stellar-changelog-embed' ),
 						'type'              => 'string',
 						'sanitize_callback' => 'sanitize_text_field',
 					],
-					'path'          => [
+					'path'         => [
 						'required'          => false,
 						'default'           => 'changelog.txt',
 						'description'       => __( 'Path to changelog file in repository', 'stellar-changelog-embed' ),
 						'type'              => 'string',
 						'sanitize_callback' => 'sanitize_text_field',
 					],
-					'branch'        => [
+					'branch'       => [
 						'required'          => false,
 						'default'           => 'main',
 						'description'       => __( 'Repository branch', 'stellar-changelog-embed' ),
 						'type'              => 'string',
 						'sanitize_callback' => 'sanitize_text_field',
 					],
-					'max_versions'  => [
+					'max_versions' => [
 						'required'          => false,
 						'default'           => 5,
 						'description'       => __( 'Maximum versions to return', 'stellar-changelog-embed' ),

@@ -5,6 +5,8 @@
  * Version: 2.0.0
  * Author: StellarWP
  * License: GPLv2 or later
+ *
+ * @package StellarWP\ChangelogEmbed
  */
 
 namespace StellarWP\ChangelogEmbed;
@@ -13,6 +15,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 define( 'STELLAR_CHANGELOG_EMBED_DIR', __DIR__ );
 
-add_action( 'init', static function() {
-	Plugin::instance()->register();
-} );
+add_action(
+	'init',
+	static function () {
+		Plugin::instance()->register();
+	}
+);
