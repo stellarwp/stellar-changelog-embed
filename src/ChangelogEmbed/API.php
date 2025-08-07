@@ -114,11 +114,29 @@ class API {
 		$branch       = $request->get_param( 'branch' );
 		$max_versions = $request->get_param( 'max_versions' );
 
+		$changelog_parser = new Changelog_Parser();
+		$cache            = new Cache();
+
+		$cache_key   = $owner . '_' . $repo . '_' . $path . '_' . $branch . '_' . $max_versions;
+		$cached_data = $cache->get( $cache_key );
+
+		if ( $cached_data ) {
+			if ( is_wp_error( $cached_data ) ) {
+				return rest_ensure_response( $cached_data );
+			}
+
+			$changelog_data = $changelog_parser->parse( $cached_data, $max_versions );
+
+			return rest_ensure_response( $changelog_data );
+		}
+
 		// Get GitHub API instance.
 		$github_api = new GitHub_API();
 
 		// Fetch changelog content.
 		$changelog_content = $github_api->get_file_content( $owner, $repo, $path, $branch );
+
+		$cache->set( $cache_key, $changelog_content );
 
 		if ( is_wp_error( $changelog_content ) ) {
 			return rest_ensure_response( $changelog_content );

@@ -9,6 +9,8 @@
 
 namespace StellarWP\ChangelogEmbed;
 
+use WP_REST_Request;
+
 /**
  * Plugin class.
  *
@@ -57,36 +59,22 @@ class Plugin {
 	 * @return string|\WP_Error
 	 */
 	public function render( $attributes ) {
-		// Get the URL from the block attributes.
-		$changelog_url = isset( $attributes['changelogUrl'] ) ? esc_url_raw( $attributes['changelogUrl'] ) : '';
+		$request = new WP_REST_Request();
 
-		// If no URL is provided, display a message.
-		if ( empty( $changelog_url ) ) {
-			return '';
+		foreach ( $attributes as $key => $value ) {
+			$request->set_param( $key, $value );
 		}
 
-		// Fetch the contents of the text file.
-		$response = wp_remote_get( $changelog_url );
+		$api      = new API();
+		$response = $api->get_changelog( $request );
 
-		if ( is_wp_error( $response ) ) {
-			return '';
-		}
+		$changelog_data = $response->get_data();
 
-		$body = wp_remote_retrieve_body( $response );
-
-		// Replace each backtick-enclosed text with a <code> tag.
-		$body = preg_replace( '/`([^`]+)`/', '<code>$1</code>', $body );
-
-		// Make headings <h3> tags.
-		$body = preg_replace( '/= \[(\d+\.\d+\.\d+)\] =/', "\n<h3>$1</h3>", $body );
-
-		// Replace each asterisk at the beginning of a line with a list item <li>.
-		$body = preg_replace( '/^\* (.+)/m', '<li>$1</li>', $body );
-
-		// Wrap all groups of list items in an unordered list <ul>.
-		$body = preg_replace( '/(<li>.+<\/li>\n)+/', '<ul>$0</ul>', $body );
+		ob_start();
+		include_once STELLAR_CHANGELOG_EMBED_DIR . '/src/views/changelog.php';
+		$template = (string) ob_get_clean();
 
 		// Return the contents of the text file.
-		return wp_kses_post( $body );
+		return wp_kses_post( $template );
 	}
 }
