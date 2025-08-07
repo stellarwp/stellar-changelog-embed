@@ -33,13 +33,13 @@ class API {
 				'args'                => [
 					'owner'        => [
 						'required'          => true,
-						'description'       => __( 'GitHub_API repository owner', 'stellar-changelog-embed' ),
+						'description'       => __( 'GitHub repository owner', 'stellar-changelog-embed' ),
 						'type'              => 'string',
 						'sanitize_callback' => 'sanitize_text_field',
 					],
 					'repo'         => [
 						'required'          => true,
-						'description'       => __( 'GitHub_API repository name', 'stellar-changelog-embed' ),
+						'description'       => __( 'GitHub repository name', 'stellar-changelog-embed' ),
 						'type'              => 'string',
 						'sanitize_callback' => 'sanitize_text_field',
 					],
@@ -86,8 +86,8 @@ class API {
 		$branch       = $request->get_param( 'branch' );
 		$max_versions = $request->get_param( 'max_versions' );
 
-		// Get GitHub_API API instance.
-		$github_api = new GitHub_API();
+		// Get GitHub API instance.
+		$GitHub = new GitHub_API();
 
 		// Fetch changelog content.
 		$changelog_content = $github_api->get_file_content( $owner, $repo, $path, $branch );
