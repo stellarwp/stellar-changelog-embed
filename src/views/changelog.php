@@ -1,7 +1,7 @@
 <?php
 /**
  * Template to display changelog on the frontend.
- * 
+ *
  * @since 2.0.0
  *
  * @var array $changelog_data    Array of changelog versions.
@@ -46,14 +46,14 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 				<div 
 				class="stellar-changelog-embed__version" 
 					data-version-index="<?php echo esc_attr( $index ); ?>" 
-					 data-page="<?php echo esc_attr( floor( $index / $versions_per_page ) + 1 ); ?>">
+					data-page="<?php echo esc_attr( floor( $index / $versions_per_page ) + 1 ); ?>">
 				
 				<div class="stellar-changelog-embed__version-header" data-version="<?php echo esc_attr( $version['version'] ); ?>">
 					<div class="stellar-changelog-embed__version-info">
 						<h3 class="stellar-changelog-embed__version-title">
-							<?php 
+							<?php
 							/* translators: %s: Version number */
-							printf( esc_html__( 'Version %s', 'stellar-changelog-embed' ), esc_html( $version['version'] ) ); 
+							printf( esc_html__( 'Version %s', 'stellar-changelog-embed' ), esc_html( $version['version'] ) );
 							?>
 						</h3>
 						
@@ -93,6 +93,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 					}
 					?>
 					
+					<?php // phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited -- This does not apply to this file. ?>
 					<?php foreach ( $grouped_changes as $type => $changes ) : ?>
 						<div class="stellar-changelog-embed__section">
 							<h4 class="stellar-changelog-embed__section-header">

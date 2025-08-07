@@ -12,6 +12,8 @@
 	<exclude-pattern>vendor/</exclude-pattern>
 	<exclude-pattern>vendor-prefixed/</exclude-pattern>
 	<exclude-pattern>tests/_data</exclude-pattern>
+	<exclude-pattern>build/modules/blocks/**/*.asset.php</exclude-pattern>
+	<exclude-pattern>node_modules/</exclude-pattern>
 
 	<!-- How to scan -->
 	<!-- Formats of the report -->

@@ -1,7 +1,7 @@
 <?php
 /**
  * Changelog Parser.
- * 
+ *
  * TODO: Test it with multiple log files from different repositories.
  *
  * @since 2.0.0
@@ -29,7 +29,7 @@ class Changelog_Parser {
 	 */
 	public function parse( string $content, int $max_versions = 5 ): array {
 		// Initialize variables.
-		$changelog_data = [];
+		$changelog_data  = [];
 		$current_version = null;
 
 		// Split content into lines.
@@ -55,10 +55,10 @@ class Changelog_Parser {
 				$date = isset( $matches[2] ) ? trim( $matches[2] ) : '';
 
 				$current_version = [
-					'version'   => $version,
-					'date'      => $date,
-					'isLatest'  => count( $changelog_data ) === 0, // First one is latest.
-					'changes'   => [],
+					'version'  => $version,
+					'date'     => $date,
+					'isLatest' => count( $changelog_data ) === 0, // First one is latest.
+					'changes'  => [],
 				];
 
 				$changelog_data[] = $current_version;
@@ -66,10 +66,10 @@ class Changelog_Parser {
 			}
 
 			// Process change entries (e.g., "* Fix - Fixed an issue...").
-			if ( $current_version !== null && 
+			if ( $current_version !== null &&
 				preg_match( '/^\*\s*([\w\-]+)\s*-\s*(.+)$/i', $line, $matches ) ) {
 
-				$type = trim( $matches[1] );
+				$type    = trim( $matches[1] );
 				$content = trim( $matches[2] );
 
 				$change = [
@@ -78,7 +78,7 @@ class Changelog_Parser {
 				];
 
 				// Add to current version's changes.
-				$index = count( $changelog_data ) - 1;
+				$index                                 = count( $changelog_data ) - 1;
 				$changelog_data[ $index ]['changes'][] = $change;
 			}
 		}
