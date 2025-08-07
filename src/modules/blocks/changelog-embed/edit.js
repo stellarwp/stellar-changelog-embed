@@ -28,6 +28,7 @@ export default function Edit(props) {
 		changelogUrlInfo = (<a href={attributes.changelogUrl} target="_blank">{attributes.changelogUrl}</a>);
 	}
 
+  // TODO: Improve the styling of the inspector controls.
   return (
 		<Fragment>
 			<InspectorControls>

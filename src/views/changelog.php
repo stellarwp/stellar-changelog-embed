@@ -98,9 +98,11 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 						<div class="stellar-changelog-embed__section">
 							<h4 class="stellar-changelog-embed__section-header">
 								<span class="stellar-changelog-embed__section-title">
+									<?php // TODO: Pluralize the type. ?>
 									<?php echo esc_html( $type ); ?>
 								</span>
 								<span class="stellar-changelog-embed__section-count">
+									<?php // TODO: Investigate what the previous code did here. ?>
 									<?php echo count( $changes ); ?>
 								</span>
 							</h4>
