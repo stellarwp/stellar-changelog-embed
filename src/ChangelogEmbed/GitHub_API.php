@@ -1,6 +1,6 @@
 <?php
 /**
- * GitHub_API API Integration.
+ * GitHub API Integration.
  *
  * @since 2.0.0
  *
@@ -12,13 +12,13 @@ namespace StellarWP\ChangelogEmbed;
 use WP_Error;
 
 /**
- * Handles interactions with the GitHub_API API.
+ * Handles interactions with the GitHub API.
  *
  * @since 2.0.0
  */
 class GitHub_API {
 	/**
-	 * GitHub_API API base URL.
+	 * GitHub API base URL.
 	 *
 	 * @since 2.0.0
 	 *
@@ -27,7 +27,7 @@ class GitHub_API {
 	private string $api_base_url = 'https://api.github.com';
 
 	/**
-	 * Get file content from GitHub_API repository.
+	 * Get file content from GitHub repository.
 	 *
 	 * TODO: Test with public and non-public (with a token and without a token) repositories.
 	 *
@@ -49,17 +49,8 @@ class GitHub_API {
 		) {
 			return new WP_Error(
 				'missing_params',
-				__( 'Missing required parameters for GitHub_API API request.', 'stellar-changelog-embed' )
+				__( 'Missing required parameters for GitHub API request.', 'stellar-changelog-embed' )
 			);
-		}
-
-		// Create cache key.
-		$cache_key = 'stellar_changelog_embed_' . md5( $owner . '_' . $repo . '_' . $file_path . '_' . $branch );
-
-		// Check for cached content.
-		$cached_content = get_transient( $cache_key );
-		if ( false !== $cached_content ) {
-			return $cached_content;
 		}
 
 		// Build request URL.
@@ -97,7 +88,6 @@ class GitHub_API {
 		}
 
 		// Check response code.
-
 		$response_code = wp_remote_retrieve_response_code( $response );
 
 		if ( 200 !== $response_code ) {
@@ -105,73 +95,14 @@ class GitHub_API {
 				'github_api_error',
 				sprintf(
 					/* translators: %1$d: HTTP response code, %2$s: Response message */
-					__( 'GitHub_API API error (HTTP %1$d): %2$s', 'stellar-changelog-embed' ),
+					__( 'GitHub API error (HTTP %1$d): %2$s', 'stellar-changelog-embed' ),
 					$response_code,
 					wp_remote_retrieve_response_message( $response )
 				)
 			);
 		}
 
-		// Get response body.
-		$content = wp_remote_retrieve_body( $response );
-
-		// Cache the result with configurable duration.
-		set_transient( $cache_key, $content, $this->get_cache_duration() );
-
-		return $content;
-	}
-
-	/**
-	 * Clears the plugin's cache.
-	 *
-	 * TODO: Test it later.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return int Number of cache items cleared.
-	 */
-	public function clear_cache(): int {
-		global $wpdb;
-
-		// Get all matching transients.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- We're intentionally clearing all matching transients.
-		$transients = $wpdb->get_col(
-			$wpdb->prepare(
-				"SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s",
-				'_transient_stellar_changelog_embed_%'
-			)
-		);
-
-		$count = 0;
-
-		// Delete each transient using WordPress API for compatibility.
-		foreach ( $transients as $transient ) {
-			$transient_name = str_replace( '_transient_', '', $transient );
-			if ( delete_transient( $transient_name ) ) {
-				++$count;
-			}
-		}
-
-		return $count;
-	}
-
-	/**
-	 * Gets the current cache duration.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return int Cache duration in seconds.
-	 */
-	public function get_cache_duration(): int {
-		/**
-		 * Filters the cache duration.
-		 *
-		 * @since 2.0.0
-		 *
-		 * @param int $default_cache_duration The default cache duration in seconds. Default is 1 hour.
-		 *
-		 * @return int Cache duration in seconds.
-		 */
-		return apply_filters( 'stellar_changelog_embed_cache_duration', HOUR_IN_SECONDS );
+		// Return the response body.
+		return wp_remote_retrieve_body( $response );
 	}
 }

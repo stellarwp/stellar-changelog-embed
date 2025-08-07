@@ -87,7 +87,7 @@ class API {
 		$max_versions = $request->get_param( 'max_versions' );
 
 		// Get GitHub API instance.
-		$GitHub = new GitHub_API();
+		$github_api = new GitHub_API();
 
 		// Fetch changelog content.
 		$changelog_content = $github_api->get_file_content( $owner, $repo, $path, $branch );
