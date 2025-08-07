@@ -46,13 +46,13 @@ To avoid GitHub API rate limits or to access private repositories:
 The plugin expects changelog files in this format:
 
 ```
-= [4.21.1] =
+= [4.21.1 2025-08-07] =
 * Fix - Fixed missing quiz points in the activity report widget.
 * Tweak - Improved the UX of the quiz template saving process.
 * Feature - Added new functionality for users.
 * Security - Fixed potential vulnerability in the login system.
 
-= [4.21.0] =
+= [4.21.0 2025-07-01] =
 * Feature - Added new quiz statistics visualization tools.
 * Fix - Resolved an issue with the course progress not updating correctly.
 ...
