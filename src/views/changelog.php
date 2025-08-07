@@ -65,7 +65,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 								<?php
 								echo esc_html(
 									wp_date(
-										get_option( 'date_format', 'F d, Y' ),
+										get_option( 'date_format', 'F j, Y' ),
 										strtotime( $version['date'] ) // Assumes UTC for release, so depending on your timezone it may look "off".
 									)
 								);
