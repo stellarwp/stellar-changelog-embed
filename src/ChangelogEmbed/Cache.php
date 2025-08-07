@@ -135,6 +135,6 @@ class Cache {
 		 *
 		 * @return int Cache duration in seconds.
 		 */
-		return apply_filters( 'wp_changelog_viewer_cache_duration', HOUR_IN_SECONDS );
+		return apply_filters( 'stellar_changelog_embed_cache_duration', HOUR_IN_SECONDS );
 	}
 } 
