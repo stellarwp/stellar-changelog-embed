@@ -44,7 +44,7 @@ class Changelog_Parser {
 			}
 
 			// Check for version headers (e.g., "= [4.21.1] =", "= [4.21.1] 2025-08-07 =").
-			if ( preg_match( '/^=\s*\[([^\]]+)\]\s*(?:(?:[^=])+)? =$/i', $line, $matches ) ) {
+			if ( preg_match( '/^=\s*\[([^\]]+)\]\s*((?:[^=])+)?\s*=$/i', $line, $matches ) ) {
 				// If we've hit the max versions, stop processing.
 				if ( count( $changelog_data ) >= $max_versions ) {
 					break;
