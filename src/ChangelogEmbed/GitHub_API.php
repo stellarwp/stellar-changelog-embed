@@ -15,6 +15,10 @@ use WP_Error;
  * Handles interactions with the GitHub API.
  *
  * @since 2.0.0
+ *
+ * @uses apply_filters() Calls 'stellar_changelog_embed_supported_file_types' to filter
+ *                      the list of supported file extensions for changelog files.
+ *                      Default: ['txt', 'md', 'markdown']
  */
 class GitHub_API {
 	/**
@@ -50,6 +54,34 @@ class GitHub_API {
 			return new WP_Error(
 				'missing_params',
 				__( 'Missing required parameters for GitHub API request.', 'stellar-changelog-embed' )
+			);
+		}
+
+		// Validate file type.
+		$file_extension = pathinfo( $file_path, PATHINFO_EXTENSION );
+
+		/**
+		 * Filters the list of supported file extensions for changelog files.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array $supported_types Array of supported file extensions (without dots). Default: 'txt' only.
+		 *
+		 * @return array Modified array of supported file extensions.
+		 */
+		$supported_types = apply_filters(
+			'stellar_changelog_embed_supported_file_types',
+			[ 'txt' ]
+		);
+
+		if ( ! in_array( strtolower( $file_extension ), $supported_types, true ) ) {
+			return new WP_Error(
+				'unsupported_file_type',
+				sprintf(
+					/* translators: %1$s: File extension. */
+					__( 'Unsupported file type "%1$s"', 'stellar-changelog-embed' ),
+					$file_extension
+				)
 			);
 		}
 
