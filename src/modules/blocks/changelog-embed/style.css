@@ -146,7 +146,7 @@
     height: 14px;
 }
 
-.stellar-changelog-embed__toggle[aria-expanded="false"] .stellar-changelog-embed__toggle-icon::after {
+.stellar-changelog-embed__toggle[aria-expanded="true"] .stellar-changelog-embed__toggle-icon::after {
     transform: rotate(90deg);
 }
 
