@@ -4,7 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { TextControl, PanelBody } from '@wordpress/components';
+import { TextControl, PanelBody, __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
@@ -29,8 +29,7 @@ export default function Edit(props) {
 		changelogUrlInfo = (<a href={attributes.changelogUrl} target="_blank">{attributes.changelogUrl}</a>);
 	}
 
-  // TODO: Improve the styling of the inspector controls.
-  return (
+	return (
 		<Fragment>
 			<InspectorControls>
 				<PanelBody title={__("Changelog Settings", "stellar-changelog-embed")} initialOpen={true}>
@@ -38,6 +37,7 @@ export default function Edit(props) {
 						label={__("Owner", "stellar-changelog-embed")}
 						value={attributes.owner}
 						onChange={(newOwner) => setAttributes({ owner: newOwner })}
+						placeholder="stellarwp"
 					/>
 
 					<TextControl
@@ -61,11 +61,18 @@ export default function Edit(props) {
 						placeholder="main"
 					/>
 
-					<TextControl
+					// TODO: Figure out why these two controls always show 5 even when saved to a different value.
+
+					<NumberControl
 						label={__("Max Versions", "stellar-changelog-embed")}
 						value={attributes.max_versions}
 						onChange={(newMaxVersions) => setAttributes({ max_versions: newMaxVersions })}
-						placeholder="5"
+					/>
+
+					<NumberControl
+						label={__("Per-Page", "stellar-changelog-embed")}
+						value={attributes.per_page}
+						onChange={(newPerPage) => setAttributes({ per_page: newPerPage })}
 					/>
 				</PanelBody>
 			</InspectorControls>
