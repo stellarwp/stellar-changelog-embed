@@ -14,6 +14,8 @@ namespace StellarWP\ChangelogEmbed;
 require_once __DIR__ . '/vendor/autoload.php';
 
 define( 'STELLAR_CHANGELOG_EMBED_DIR', __DIR__ );
+define( 'STELLAR_CHANGELOG_EMBED_URL', plugin_dir_url( __FILE__ ) );
+define( 'STELLAR_CHANGELOG_EMBED_VERSION', '2.0.0' );
 
 add_action(
 	'init',

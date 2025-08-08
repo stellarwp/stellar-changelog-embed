@@ -68,6 +68,22 @@ class Plugin {
 		$api      = new API();
 		$response = $api->get_changelog( $request );
 
+		// TODO: Maybe switch to the template lib in a separate PR?
+
+		if ( is_wp_error( $response ) ) {
+			$error_message = sprintf(
+				/* translators: %s is the error message. */
+				__( 'Error fetching changelog data: %s', 'stellar-changelog-embed' ),
+				$response->get_error_message()
+			);
+
+			ob_start();
+			include STELLAR_CHANGELOG_EMBED_DIR . '/src/views/error.php';
+			$template = (string) ob_get_clean();
+
+			return wp_kses_post( $template );
+		}
+
 		$changelog_data = $response->get_data();
 
 		ob_start();

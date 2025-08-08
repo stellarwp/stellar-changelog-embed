@@ -4,7 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { TextControl } from '@wordpress/components';
+import { TextControl, PanelBody } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
@@ -24,7 +24,7 @@ export default function Edit(props) {
 	let changelogUrlInfo = null;
 
 	if ( ! attributes.changelogUrl ) {
-		changelogUrlInfo = (<span style={{ color: '#999', fontSize: '1rem' }}>{__("Configure in the sidebar.", "stellar-changelog-embed")}</span>);
+		changelogUrlInfo = (<span style={{ color: '#999', fontSize: '1rem' }}>{__("Configure in the sidebar. This box is not visible in the frontend.", "stellar-changelog-embed")}</span>);
 	} else {
 		changelogUrlInfo = (<a href={attributes.changelogUrl} target="_blank">{attributes.changelogUrl}</a>);
 	}
@@ -33,7 +33,7 @@ export default function Edit(props) {
   return (
 		<Fragment>
 			<InspectorControls>
-				<div className="block-editor-block-card">
+				<PanelBody title={__("Changelog Settings", "stellar-changelog-embed")} initialOpen={true}>
 					<TextControl
 						label={__("Owner", "stellar-changelog-embed")}
 						value={attributes.owner}
@@ -44,31 +44,35 @@ export default function Edit(props) {
 						label={__("Repo", "stellar-changelog-embed")}
 						value={attributes.repo}
 						onChange={(newRepo) => setAttributes({ repo: newRepo })}
+						placeholder="stellar-changelog-embed"
 					/>
 
 					<TextControl
 						label={__("Path", "stellar-changelog-embed")}
 						value={attributes.path}
 						onChange={(newPath) => setAttributes({ path: newPath })}
+						placeholder="changelog.txt"
 					/>
 
 					<TextControl
 						label={__("Branch", "stellar-changelog-embed")}
 						value={attributes.branch}
 						onChange={(newBranch) => setAttributes({ branch: newBranch })}
+						placeholder="main"
 					/>
 
 					<TextControl
 						label={__("Max Versions", "stellar-changelog-embed")}
 						value={attributes.max_versions}
 						onChange={(newMaxVersions) => setAttributes({ max_versions: newMaxVersions })}
+						placeholder="5"
 					/>
-				</div>
+				</PanelBody>
 			</InspectorControls>
 
 			<div {...blockProps}>
 				<div style={{ backgroundColor: '#f0f0f0', border: '1px solid #000', padding: '1rem' }}>
-					{__("Changelog Embed", "stellar-changelog-embed")} <span style={{ color: '#999', fontSize: '0.8rem' }}>({__("this box is not visible in the frontend", "stellar-changelog-embed")})</span>
+					{__("Changelog Embed", "stellar-changelog-embed")}
 					<div>{changelogUrlInfo}</div>
 				</div>
 
