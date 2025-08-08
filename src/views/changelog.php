@@ -49,7 +49,10 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 		</div>
 		
 		<div class="stellar-changelog-embed__versions">
-			<?php foreach ( $changelog_data as $index => $version ) : ?>
+			<?php
+			foreach ( $changelog_data as $index => $version ) :
+				$version_id = wp_generate_uuid4();
+				?>
 					<div 
 					class="stellar-changelog-embed__version" 
 						data-version-index="<?php echo esc_attr( $index ); ?>" 
@@ -88,7 +91,12 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 							<?php endif; ?>
 						</div>
 						
-						<button type="button" class="stellar-changelog-embed__toggle" aria-expanded="true">
+						<button
+							aria-expanded="true"
+							aria-controls="stellar-changelog-embed__version-content--<?php echo esc_attr( $version_id ); ?>"
+							class="stellar-changelog-embed__toggle"
+							type="button"
+						>
 							<span class="screen-reader-text">
 								<?php esc_html_e( 'Toggle changelog details', 'stellar-changelog-embed' ); ?>
 							</span>
@@ -96,7 +104,10 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 						</button>
 					</div>
 					
-					<div class="stellar-changelog-embed__version-content">
+					<div
+						class="stellar-changelog-embed__version-content"
+						id="stellar-changelog-embed__version-content--<?php echo esc_attr( $version_id ); ?>"
+					>
 						<?php
 						// Group changes by type.
 						$grouped_changes = [];
@@ -115,12 +126,34 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 									<span class="stellar-changelog-embed__section-title">
 										<?php echo esc_html( Helper::pluralize_type( $type ) ); ?>
 									</span>
-									<span class="stellar-changelog-embed__section-count">
-										<?php echo count( $changes ); ?>
-									</span>
+									<button
+										aria-expanded="true"
+										aria-controls="stellar-changelog-embed__changes--<?php echo esc_attr( $version_id ); ?>-<?php echo esc_attr( strtolower( $type ) ); ?>"
+										class="stellar-changelog-embed__section-count"
+										type="button"
+									>
+										<span class="screen-reader-text">
+											<?php
+											echo esc_html(
+												sprintf(
+													// translators: %1$d: Number of changes. %2$s: Section title.
+													__( 'Toggle %1$d %2$s', 'stellar-changelog-embed' ),
+													count( $changes ),
+													Helper::pluralize_type( $type )
+												)
+											);
+											?>
+										</span>
+										<span aria-hidden="true">
+											<?php echo esc_html( count( $changes ) ); ?>
+										</span>
+									</button>
 								</h4>
 								
-								<ul class="stellar-changelog-embed__changes">
+								<ul
+									class="stellar-changelog-embed__changes"
+									id="stellar-changelog-embed__changes--<?php echo esc_attr( $version_id ); ?>-<?php echo esc_attr( strtolower( $type ) ); ?>"
+								>
 									<?php foreach ( $changes as $change ) : ?>
 										<li class="stellar-changelog-embed__change">
 											<?php // TODO: Investigate what the previous code did here. ?>
