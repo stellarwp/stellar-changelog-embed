@@ -98,7 +98,15 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 							type="button"
 						>
 							<span class="screen-reader-text">
-								<?php esc_html_e( 'Toggle changelog details', 'stellar-changelog-embed' ); ?>
+								<?php
+								echo esc_html(
+									sprintf(
+										// translators: %s: Version number.
+										__( 'Toggle version %s changelog details.', 'stellar-changelog-embed' ),
+										$version['version']
+									)
+								);
+								?>
 							</span>
 							<span class="stellar-changelog-embed__toggle-icon" aria-hidden="true"></span>
 						</button>
@@ -136,10 +144,11 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 											<?php
 											echo esc_html(
 												sprintf(
-													// translators: %1$d: Number of changes. %2$s: Section title.
-													__( 'Toggle %1$d %2$s', 'stellar-changelog-embed' ),
+													// translators: %1$d: Number of changes. %2$s: Section title. %3$s: Version number.
+													__( 'Toggle %1$d %2$s for version %3$s.', 'stellar-changelog-embed' ),
 													count( $changes ),
-													Helper::pluralize_type( $type )
+													Helper::pluralize_type( $type ),
+													$version['version']
 												)
 											);
 											?>
