@@ -4,7 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { TextControl, PanelBody } from '@wordpress/components';
+import { TextControl, PanelBody, __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
@@ -38,6 +38,7 @@ export default function Edit(props) {
 						label={__("Owner", "stellar-changelog-embed")}
 						value={attributes.owner}
 						onChange={(newOwner) => setAttributes({ owner: newOwner })}
+						placeholder="stellarwp"
 					/>
 
 					<TextControl
@@ -61,11 +62,18 @@ export default function Edit(props) {
 						placeholder="main"
 					/>
 
-					<TextControl
+					<NumberControl
 						label={__("Max Versions", "stellar-changelog-embed")}
 						value={attributes.max_versions}
 						onChange={(newMaxVersions) => setAttributes({ max_versions: newMaxVersions })}
-						placeholder="5"
+						defaultValue={5}
+					/>
+
+					<NumberControl
+						label={__("Per-Page", "stellar-changelog-embed")}
+						value={attributes.per_page}
+						onChange={(newPerPage) => setAttributes({ per_page: newPerPage })}
+						defaultValue={5}
 					/>
 				</PanelBody>
 			</InspectorControls>

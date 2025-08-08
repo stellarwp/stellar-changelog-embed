@@ -34,6 +34,10 @@
         "max_versions": {
             "type": "integer",
             "default": 5
+        },
+        "per_page": {   
+            "type": "integer",
+            "default": 5
         }
     },
     "textdomain": "stellarwp-changelog-embed",

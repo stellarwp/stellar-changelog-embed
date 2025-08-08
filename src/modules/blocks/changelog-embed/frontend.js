@@ -21,7 +21,7 @@
      */
     function initChangelog() {
         // Initialize pagination for each changelog viewer.
-        $('.wp-changelog-viewer').each(function() {
+        $('.stellar-changelog-embed').each(function() {
             initPagination($(this));
         });
         
@@ -97,11 +97,11 @@
             return; // No pagination needed.
         }
         
-        let currentPage = 1;
+        $viewer.data('current-page', 1);
         const totalPages = Math.ceil(totalVersions / versionsPerPage);
         
         // Show first page initially.
-        showPage($viewer, currentPage, versionsPerPage);
+        showPage($viewer, 1, versionsPerPage);
         
         // Handle pagination button clicks.
         $viewer.on('click', '.stellar-changelog-embed__pagination-btn', function(e) {
@@ -112,16 +112,18 @@
                 return;
             }
             
-            if ($btn.hasClass('stellar-changelog-embed__pagination-prev')) {
-                currentPage = Math.max(1, currentPage - 1);
-            } else if ($btn.hasClass('stellar-changelog-embed__pagination-next')) {
-                currentPage = Math.min(totalPages, currentPage + 1);
-            } else if ($btn.hasClass('stellar-changelog-embed__pagination-number')) {
-                currentPage = parseInt($btn.data('page'));
+            if ($btn.hasClass('stellar-changelog-embed__pagination-btn--prev')) {
+                $viewer.data('current-page', Math.max(1, $viewer.data('current-page') - 1));
+            } else if ($btn.hasClass('stellar-changelog-embed__pagination-btn--next')) {
+                $viewer.data('current-page', Math.min(totalPages, $viewer.data('current-page') + 1));
+            } else if ($btn.hasClass('stellar-changelog-embed__pagination-btn--number')) {
+                $viewer.data('current-page', parseInt($btn.data('page')));
             }
             
-            showPage($viewer, currentPage, versionsPerPage);
-            updatePaginationControls($viewer, currentPage, totalPages);
+            showPage($viewer, $viewer.data('current-page'), versionsPerPage);
+            updatePaginationControls($viewer, $viewer.data('current-page'), totalPages);
+
+			console.log( $viewer.data('current-page') );
             
             // Scroll to top of changelog.
             $viewer[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -154,7 +156,7 @@
         });
         
         // Update pagination info.
-        const $paginationText = $viewer.find('.wp-changelog-pagination-text .current-page');
+        const $paginationText = $viewer.find('.stellar-changelog-embed__current-page');
         if ($paginationText.length) {
             $paginationText.text(page);
         }
@@ -172,9 +174,9 @@
 	 * @return void
      */
     function updatePaginationControls($viewer, currentPage, totalPages) {
-        const $prevBtn = $viewer.find('.stellar-changelog-embed__pagination-prev');
-        const $nextBtn = $viewer.find('.stellar-changelog-embed__pagination-next');
-        const $numberBtns = $viewer.find('.stellar-changelog-embed__pagination-number');
+        const $prevBtn = $viewer.find('.stellar-changelog-embed__pagination-btn--prev');
+        const $nextBtn = $viewer.find('.stellar-changelog-embed__pagination-btn--next');
+        const $numberBtns = $viewer.find('.stellar-changelog-embed__pagination-btn--number');
         
         // Update prev/next buttons.
         $prevBtn.prop('disabled', currentPage <= 1);
