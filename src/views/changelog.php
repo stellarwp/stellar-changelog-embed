@@ -102,7 +102,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 								echo esc_html(
 									sprintf(
 										// translators: %s: Version number.
-										__( 'Toggle version %s changelog details.', 'stellar-changelog-embed' ),
+										__( 'Toggle version %s details.', 'stellar-changelog-embed' ),
 										$version['version']
 									)
 								);
