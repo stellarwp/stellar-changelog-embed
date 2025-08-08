@@ -36,8 +36,7 @@
             "default": 5
         },
         "per_page": {   
-            "type": "integer",
-            "default": 5
+            "type": "integer"
         }
     },
     "textdomain": "stellarwp-changelog-embed",

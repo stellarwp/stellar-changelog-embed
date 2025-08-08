@@ -29,8 +29,7 @@ export default function Edit(props) {
 		changelogUrlInfo = (<a href={attributes.changelogUrl} target="_blank">{attributes.changelogUrl}</a>);
 	}
 
-  // TODO: Improve the styling of the inspector controls.
-  return (
+	return (
 		<Fragment>
 			<InspectorControls>
 				<PanelBody title={__("Changelog Settings", "stellar-changelog-embed")} initialOpen={true}>
@@ -62,18 +61,18 @@ export default function Edit(props) {
 						placeholder="main"
 					/>
 
+					// TODO: Figure out why these two controls always show 5 even when saved to a different value.
+
 					<NumberControl
 						label={__("Max Versions", "stellar-changelog-embed")}
 						value={attributes.max_versions}
 						onChange={(newMaxVersions) => setAttributes({ max_versions: newMaxVersions })}
-						defaultValue={5}
 					/>
 
 					<NumberControl
 						label={__("Per-Page", "stellar-changelog-embed")}
 						value={attributes.per_page}
 						onChange={(newPerPage) => setAttributes({ per_page: newPerPage })}
-						defaultValue={5}
 					/>
 				</PanelBody>
 			</InspectorControls>
