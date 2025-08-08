@@ -37,5 +37,7 @@
         }
     },
     "textdomain": "stellarwp-changelog-embed",
-    "editorScript": "file:./index.js"
+    "editorScript": "file:./index.js",
+    "style": "file:./style-index.css",
+    "viewScript": [ "jquery", "file:./frontend.js" ]
 }
