@@ -122,8 +122,6 @@
             
             showPage($viewer, $viewer.data('current-page'), versionsPerPage);
             updatePaginationControls($viewer, $viewer.data('current-page'), totalPages);
-
-			console.log( $viewer.data('current-page') );
             
             // Scroll to top of changelog.
             $viewer[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
