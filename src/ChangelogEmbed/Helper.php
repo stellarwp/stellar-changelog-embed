@@ -21,23 +21,23 @@ class Helper {
 	 * @since 2.0.0
 	 *
 	 * @param string $type The change type (e.g., 'Fix', 'Feature').
-     *
+	 *
 	 * @return string The pluralized version.
 	 */
 	public static function pluralize_type( string $type ): string {
 		$plurals = [
-			'Fix'         => 'Fixes',
-			'Tweak'       => 'Tweaks',
-			'Feature'     => 'Features',
-			'Security'    => 'Security',
-			'Performance' => 'Performance',
-			'Enhancement' => 'Enhancements',
-			'Update'      => 'Updates',
-			'Improvement' => 'Improvements',
-			'Change'      => 'Changes',
-			'Addition'    => 'Additions',
-			'Removal'     => 'Removals',
-			'Deprecation' => 'Deprecations',
+			__( 'Addition', 'stellar-changelog-embed' )    => __( 'Additions', 'stellar-changelog-embed' ),
+			__( 'Change', 'stellar-changelog-embed' )      => __( 'Changes', 'stellar-changelog-embed' ),
+			__( 'Deprecation', 'stellar-changelog-embed' ) => __( 'Deprecations', 'stellar-changelog-embed' ),
+			__( 'Enhancement', 'stellar-changelog-embed' ) => __( 'Enhancements', 'stellar-changelog-embed' ),
+			__( 'Feature', 'stellar-changelog-embed' )     => __( 'Features', 'stellar-changelog-embed' ),
+			__( 'Fix', 'stellar-changelog-embed' )         => __( 'Fixes', 'stellar-changelog-embed' ),
+			__( 'Improvement', 'stellar-changelog-embed' ) => __( 'Improvements', 'stellar-changelog-embed' ),
+			__( 'Performance', 'stellar-changelog-embed' ) => __( 'Performance', 'stellar-changelog-embed' ),
+			__( 'Removal', 'stellar-changelog-embed' )     => __( 'Removals', 'stellar-changelog-embed' ),
+			__( 'Security', 'stellar-changelog-embed' )    => __( 'Security', 'stellar-changelog-embed' ),
+			__( 'Tweak', 'stellar-changelog-embed' )       => __( 'Tweaks', 'stellar-changelog-embed' ),
+			__( 'Update', 'stellar-changelog-embed' )      => __( 'Updates', 'stellar-changelog-embed' ),
 		];
 
 		/**
