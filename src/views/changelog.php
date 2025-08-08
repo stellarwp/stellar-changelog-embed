@@ -23,7 +23,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 	<div class="stellar-changelog-embed__no-entries">
 		<?php esc_html_e( 'No changelog entries found.', 'stellar-changelog-embed' ); ?>
 	</div>
-<?php else: ?>
+<?php else : ?>
 	<div
 		class="stellar-changelog-embed" 
 		data-versions-per-page="<?php echo esc_attr( $versions_per_page ); ?>" 
@@ -110,7 +110,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 						
 						<?php // phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited -- This does not apply to this file. ?>
 						<?php foreach ( $grouped_changes as $type => $changes ) : ?>
-							<div class="stellar-changelog-embed__section">
+							<div class="stellar-changelog-embed__section" data-type="<?php echo esc_attr( $type ); ?>">
 								<h4 class="stellar-changelog-embed__section-header">
 									<span class="stellar-changelog-embed__section-title">
 										<?php echo esc_html( Helper::pluralize_type( $type ) ); ?>

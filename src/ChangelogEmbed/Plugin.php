@@ -91,6 +91,31 @@ class Plugin {
 		$template = (string) ob_get_clean();
 
 		// Return the contents of the text file.
-		return wp_kses_post( $template );
+
+		$allowed_html = wp_kses_allowed_html( 'post' );
+
+		$allowed_html = wp_parse_args(
+			$allowed_html,
+			[
+				'div' => [],
+			]
+		);
+
+		$allowed_html['div'] = wp_parse_args(
+			$allowed_html['div'],
+			[
+				'data-type'              => true,
+				'data-page'              => true,
+				'data-total-versions'    => true,
+				'data-version-index'     => true,
+				'data-version'           => true,
+				'data-versions-per-page' => true,
+			]
+		);
+
+		return wp_kses(
+			$template,
+			$allowed_html
+		);
 	}
 }
