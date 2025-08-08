@@ -181,8 +181,8 @@
         $nextBtn.prop('disabled', currentPage >= totalPages);
         
         // Update number buttons.
-        $numberBtns.removeClass('active');
-        $numberBtns.filter(`[data-page="${currentPage}"]`).addClass('active');
+        $numberBtns.removeClass('active').removeAttr('aria-current');
+        $numberBtns.filter(`[data-page="${currentPage}"]`).addClass('active').attr('aria-current', 'page');
     }
     
     /**

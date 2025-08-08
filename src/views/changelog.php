@@ -178,39 +178,53 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 		</div>
 		
 		<?php if ( $total_pages > 1 ) : ?>
-			<div class="stellar-changelog-embed__pagination">
-				<div class="stellar-changelog-embed__pagination-controls">
-					<button type="button" class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--prev" disabled>
-						<span aria-hidden="true">&laquo;</span>
-						<span class="screen-reader-text">
-							<?php esc_html_e( 'Previous page', 'stellar-changelog-embed' ); ?>
-						</span>
-					</button>
-					
-					<div class="stellar-changelog-embed__pagination-numbers">
-						<?php for ( $i = 1; $i <= $total_pages; $i++ ) : ?>
+			<nav
+				class="stellar-changelog-embed__pagination"
+				aria-label="<?php esc_html_e( 'Pagination for version details.', 'stellar-changelog-embed' ); ?>"
+			>
+				<ul class="stellar-changelog-embed__pagination-controls">
+					<li>
+						<button type="button" class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--prev" disabled>
+							<span aria-hidden="true">&laquo;</span>
+							<span class="screen-reader-text">
+								<?php esc_html_e( 'Previous page', 'stellar-changelog-embed' ); ?>
+							</span>
+						</button>
+					</li>
+
+					<?php for ( $i = 1; $i <= $total_pages; $i++ ) : ?>
+						<li>
 							<button
 								type="button" 
 								class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--number <?php echo $i === 1 ? 'stellar-changelog-embed__pagination-btn--active' : ''; ?>" 
 								data-page="<?php echo esc_attr( $i ); ?>"
+								<?php if ( $i === 1 ) : ?>
+									aria-current="page"
+								<?php endif; ?>
 							>
+								<span class="screen-reader-text">
+									<?php esc_html_e( 'Page', 'stellar-changelog-embed' ); ?> 
+								</span>
+
 								<?php echo esc_html( $i ); ?>
 							</button>
-						<?php endfor; ?>
-					</div>
+						</li>
+					<?php endfor; ?>
 
-					<button
-						class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--next" 
-						<?php echo $total_pages <= 1 ? 'disabled' : ''; ?>
-						type="button" 
-					>
-						<span aria-hidden="true">&raquo;</span>
-						<span class="screen-reader-text">
-							<?php esc_html_e( 'Next page', 'stellar-changelog-embed' ); ?>
-						</span>
-					</button>
-				</div>
-			</div>
+					<li>
+						<button
+							class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--next" 
+							<?php echo $total_pages <= 1 ? 'disabled' : ''; ?>
+							type="button" 
+						>
+							<span aria-hidden="true">&raquo;</span>
+							<span class="screen-reader-text">
+								<?php esc_html_e( 'Next page', 'stellar-changelog-embed' ); ?>
+							</span>
+						</button>
+					</li>
+				</ul>
+			</nav>
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
