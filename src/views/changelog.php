@@ -12,6 +12,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use StellarWP\ChangelogEmbed\Helper;
+
 $total_versions    = count( $changelog_data );
 $versions_per_page = isset( $versions_per_page ) ? max( 1, intval( $versions_per_page ) ) : 5;
 $total_pages       = ceil( $total_versions / $versions_per_page );
@@ -111,8 +113,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 							<div class="stellar-changelog-embed__section">
 								<h4 class="stellar-changelog-embed__section-header">
 									<span class="stellar-changelog-embed__section-title">
-										<?php // TODO: Pluralize the type. ?>
-										<?php echo esc_html( $type ); ?>
+										<?php echo esc_html( Helper::pluralize_type( $type ) ); ?>
 									</span>
 									<span class="stellar-changelog-embed__section-count">
 										<?php echo count( $changes ); ?>
