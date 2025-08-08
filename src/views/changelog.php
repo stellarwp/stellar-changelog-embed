@@ -62,7 +62,15 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 								<span class="screen-reader-text">
 									<?php esc_html_e( 'Released on:', 'stellar-changelog-embed' ); ?>
 								</span>
-								<?php echo esc_html( $version['date'] ); ?>
+								<?php
+								echo esc_html(
+									wp_date(
+										get_option( 'date_format', 'F j, Y' ),
+										strtotime( $version['date'] ), // Assumes UTC for release.
+										new DateTimeZone( 'UTC' ) // Force UTC to avoid issues with different site timezones.
+									)
+								);
+								?>
 							</span>
 						<?php endif; ?>
 						
