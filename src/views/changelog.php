@@ -37,7 +37,11 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 			
 			<?php if ( $total_pages > 1 ) : ?>
 				<div class="stellar-changelog-embed__pagination-info">
-					<span class="stellar-changelog-embed__pagination-text">
+					<span
+						aria-live="polite"
+						class="stellar-changelog-embed__pagination-text"
+						id="stellar-changelog-embed__pagination-text"
+					>
 						<?php esc_html_e( 'Page', 'stellar-changelog-embed' ); ?> 
 						<span class="stellar-changelog-embed__current-page">1</span> 
 						<?php esc_html_e( 'of', 'stellar-changelog-embed' ); ?> 
@@ -181,6 +185,8 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 			<nav
 				class="stellar-changelog-embed__pagination"
 				aria-label="<?php esc_html_e( 'Pagination for version details.', 'stellar-changelog-embed' ); ?>"
+				aria-labelledby="stellar-changelog-embed__pagination stellar-changelog-embed__pagination-text"
+				id="stellar-changelog-embed__pagination"
 			>
 				<ul class="stellar-changelog-embed__pagination-controls">
 					<li>
