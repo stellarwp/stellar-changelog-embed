@@ -148,9 +148,15 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 											<?php
 											echo esc_html(
 												sprintf(
-													// translators: %1$d: Number of changes. %2$s: Section title. %3$s: Version number.
-													__( 'Toggle %1$d %2$s for version %3$s.', 'stellar-changelog-embed' ),
+													// translators: %1$d: Number of changes. %2$s: Section title singular. %3$s: Section title plural. %4$s: Version number.
+													_n( // phpcs:ignore WordPress.WP.I18n.MismatchedPlaceholders -- It's intentional to allow proper translation.
+														'Toggle %1$d %2$s for version %4$s.',
+														'Toggle %1$d %3$s for version %4$s.',
+														count( $changes ),
+														'stellar-changelog-embed'
+													),
 													count( $changes ),
+													$type,
 													Helper::pluralize_type( $type ),
 													$version['version']
 												)
