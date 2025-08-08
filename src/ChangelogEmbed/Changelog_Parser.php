@@ -72,6 +72,31 @@ class Changelog_Parser {
 				$type    = trim( $matches[1] );
 				$content = trim( $matches[2] );
 
+				global $shortcode_tags;
+
+				$registered_shortcodes = array_map(
+					function ( $tag ) {
+						return preg_quote( $tag, '/' );
+					},
+					array_keys( $shortcode_tags )
+				);
+
+				// Escape shortcodes that exist on this site by adding extra square brackets.
+				$content = preg_replace(
+					'/\[(' . implode( '|', $registered_shortcodes ) . ')\]/',
+					'[[$1]]',
+					$content
+				);
+
+				// Wrap text in backticks with <code> tags and double-escape shortcodes.
+				$content = preg_replace_callback(
+					'/`([^`]+)`/',
+					function ( $matches ) {
+						return '<code>' . esc_html( $matches[1] ) . '</code>';
+					},
+					$content
+				);
+
 				$change = [
 					'type'    => $type,
 					'content' => $content,
