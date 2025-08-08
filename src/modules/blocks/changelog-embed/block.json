@@ -25,7 +25,7 @@
         },
         "path": {
             "type": "string",
-            "default": ""
+            "default": "changelog.txt"
         },
         "branch": {
             "type": "string",
