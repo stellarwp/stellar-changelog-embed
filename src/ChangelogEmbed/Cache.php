@@ -167,8 +167,8 @@ class Cache {
 		if ( ! in_array( $cache_key, $keys_list, true ) ) {
 			$keys_list[] = $cache_key;
 
-			// Store the list with a longer duration than individual cache items.
-			set_transient( $keys_list_key, $keys_list, DAY_IN_SECONDS );
+			// Store the list with the same duration as individual cache items.
+			set_transient( $keys_list_key, $keys_list, $this->get_cache_duration() );
 		}
 	}
 
@@ -188,7 +188,7 @@ class Cache {
 		if ( is_array( $keys_list ) ) {
 			$keys_list = array_diff( $keys_list, [ $cache_key ] );
 
-			set_transient( $keys_list_key, $keys_list, DAY_IN_SECONDS );
+			set_transient( $keys_list_key, $keys_list, $this->get_cache_duration() );
 		}
 	}
 }
