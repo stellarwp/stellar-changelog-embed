@@ -103,9 +103,13 @@ class Settings {
 				'label_for'   => 'stellar_changelog_embed_github_token',
 				'description' => sprintf(
 					/* translators: %s: URL to GitHub API token settings */
-					__( 'Enter a GitHub API personal access token to increase API rate limits and access private repositories. You can create one %s. The full <code>repo</code> scope is required for private repositories.', 'stellar-changelog-embed' ),
+					__( 'Enter a GitHub API personal access token to increase API rate limits and access private repositories. You can create one %s.', 'stellar-changelog-embed' ),
 					'<a href="https://github.com/settings/tokens" target="_blank">' . __( 'here', 'stellar-changelog-embed' ) . '</a>'
-				),
+				) .
+				'<ul style="list-style-type: disc; margin-left: 1em;">' .
+					'<li>' . __( 'Fine-grained personal access tokens: You will need the <code>Contents</code> scope set to <code>Read-only</code>.', 'stellar-changelog-embed' ) . '</li>' .
+					'<li>' . __( 'Classic personal access tokens: The full <code>repo</code> scope is required for private repositories. If only public repositories are needed, the <code>public_repo</code> scope is sufficient.', 'stellar-changelog-embed' ) . '</li>' .
+				'</ul>',
 			]
 		);
 	}
