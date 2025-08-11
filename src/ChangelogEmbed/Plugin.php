@@ -86,7 +86,7 @@ class Plugin {
 		$versions_per_page = intval( $attributes['per_page'] ?? 5 );
 
 		ob_start();
-		include_once STELLAR_CHANGELOG_EMBED_DIR . '/src/views/changelog.php';
+		include STELLAR_CHANGELOG_EMBED_DIR . '/src/views/changelog.php';
 		$template = (string) ob_get_clean();
 
 		// Return the contents of the text file.
