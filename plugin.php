@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Stellar Changelog Embed
+ * Plugin Name: StellarWP Changelog Embed
  * Description: A block that displays the contents of a changelog file from a user-specified URL.
  * Version: 2.0.0
  * Author: StellarWP
