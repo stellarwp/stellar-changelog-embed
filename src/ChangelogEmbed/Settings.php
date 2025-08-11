@@ -104,7 +104,7 @@ class Settings {
 				'description' => sprintf(
 					/* translators: %s: URL to GitHub API token settings */
 					__( 'Enter a GitHub API personal access token to increase API rate limits and access private repositories. You can create one %s.', 'stellar-changelog-embed' ),
-					'<a href="https://github.com/settings/tokens" target="_blank">' . __( 'here', 'stellar-changelog-embed' ) . '</a>'
+					'<a href="https://github.com/settings/personal-access-tokens" target="_blank">' . __( 'here', 'stellar-changelog-embed' ) . '</a>'
 				) .
 				'<ul style="list-style-type: disc; margin-left: 1em;">' .
 					'<li>' . __( 'Fine-grained personal access tokens: You will need the <code>Contents</code> scope set to <code>Read-only</code>.', 'stellar-changelog-embed' ) . '</li>' .
