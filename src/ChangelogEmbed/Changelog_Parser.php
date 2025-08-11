@@ -162,7 +162,7 @@ class Changelog_Parser {
 
 	/**
 	 * Converts italic text styled as *italic* in the content to <em> tags.
-	 * _italic_ text is not converted, as attempting to account for this would be too complex as that pattern would often have false positives with things like action and hook names.
+	 * _italic_ text is not converted, as attempting to account for this would be too complex as that pattern would often have false positives with things like action and filter names.
 	 *
 	 * @since 2.0.0
 	 *
