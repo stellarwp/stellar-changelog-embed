@@ -54,7 +54,14 @@ class Cache {
 		$cache_key = $this->get_cache_key( $key );
 		$duration  = $duration ?? $this->get_cache_duration();
 
-		return set_transient( $cache_key, $content, $duration );
+		$result = set_transient( $cache_key, $content, $duration );
+
+		// Always maintain a list of our cache keys for clearing.
+		if ( $result ) {
+			$this->add_to_cache_keys_list( $cache_key );
+		}
+
+		return $result;
 	}
 
 	/**
@@ -69,39 +76,39 @@ class Cache {
 	public function delete( string $key ): bool {
 		$cache_key = $this->get_cache_key( $key );
 
-		return delete_transient( $cache_key );
+		$result = delete_transient( $cache_key );
+
+		// Always remove from our keys list.
+		if ( $result ) {
+			$this->remove_from_cache_keys_list( $cache_key );
+		}
+
+		return $result;
 	}
 
 	/**
 	 * Clears all plugin cache.
-	 *
-	 * TODO: This is incompatible with WP_Object_Cache, which some sites may use vs the DB for transients.
 	 *
 	 * @since 2.0.0
 	 *
 	 * @return int Number of cache items cleared.
 	 */
 	public function clear_all(): int {
-		global $wpdb;
-
-		// Get all matching transients.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- We're intentionally clearing all matching transients.
-		$transients = $wpdb->get_col(
-			$wpdb->prepare(
-				"SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s",
-				'_transient_' . $this->cache_prefix . '%'
-			)
-		);
-
 		$count = 0;
 
-		// Delete each transient using WordPress API for compatibility.
-		foreach ( $transients as $transient ) {
-			$transient_name = str_replace( '_transient_', '', $transient );
-			if ( delete_transient( $transient_name ) ) {
-				++$count;
+		// Get the list of all our cache keys.
+		$cache_keys_list = get_transient( $this->cache_prefix . 'keys_list' );
+		
+		if ( is_array( $cache_keys_list ) ) {
+			foreach ( $cache_keys_list as $key ) {
+				if ( delete_transient( $key ) ) {
+					++$count;
+				}
 			}
 		}
+		
+		// Clear the keys list itself.
+		delete_transient( $this->cache_prefix . 'keys_list' );
 
 		return $count;
 	}
@@ -137,5 +144,51 @@ class Cache {
 		 * @return int Cache duration in seconds.
 		 */
 		return apply_filters( 'stellar_changelog_embed_cache_duration', HOUR_IN_SECONDS );
+	}
+
+	/**
+	 * Adds a cache key to the list for cache clearing.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $cache_key The cache key to add.
+	 *
+	 * @return void
+	 */
+	private function add_to_cache_keys_list( string $cache_key ): void {
+		$keys_list_key = $this->cache_prefix . 'keys_list';
+		$keys_list     = get_transient( $keys_list_key );
+
+		if ( ! is_array( $keys_list ) ) {
+			$keys_list = [];
+		}
+
+		// Add the key if it's not already in the list.
+		if ( ! in_array( $cache_key, $keys_list, true ) ) {
+			$keys_list[] = $cache_key;
+
+			// Store the list with a longer duration than individual cache items.
+			set_transient( $keys_list_key, $keys_list, DAY_IN_SECONDS );
+		}
+	}
+
+	/**
+	 * Removes a cache key from the list for cache clearing.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $cache_key The cache key to remove.
+	 *
+	 * @return void
+	 */
+	private function remove_from_cache_keys_list( string $cache_key ): void {
+		$keys_list_key = $this->cache_prefix . 'keys_list';
+		$keys_list     = get_transient( $keys_list_key );
+
+		if ( is_array( $keys_list ) ) {
+			$keys_list = array_diff( $keys_list, [ $cache_key ] );
+
+			set_transient( $keys_list_key, $keys_list, DAY_IN_SECONDS );
+		}
 	}
 }
