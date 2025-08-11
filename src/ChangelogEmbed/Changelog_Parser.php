@@ -2,8 +2,6 @@
 /**
  * Changelog Parser.
  *
- * TODO: Test it with multiple log files from different repositories.
- *
  * @since 2.0.0
  *
  * @package StellarWP\ChangelogEmbed

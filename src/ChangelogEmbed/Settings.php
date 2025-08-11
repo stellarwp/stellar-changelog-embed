@@ -112,7 +112,6 @@ class Settings {
 
 	/**
 	 * Render the GitHub API token field.
-	 * TODO: Split into a template file.
 	 *
 	 * @since 2.0.0
 	 *
@@ -144,7 +143,6 @@ class Settings {
 
 	/**
 	 * Render the settings page.
-	 * TODO: Split into a template file.
 	 *
 	 * @since 2.0.0
 	 *
@@ -177,7 +175,6 @@ class Settings {
 
 	/**
 	 * Render the cache management section in admin footer.
-	 * TODO: Split into a template file.
 	 *
 	 * @since 2.0.0
 	 *

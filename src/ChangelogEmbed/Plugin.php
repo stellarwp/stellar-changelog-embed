@@ -68,8 +68,6 @@ class Plugin {
 		$api      = new API();
 		$response = $api->get_changelog( $request );
 
-		// TODO: Maybe switch to the template lib in a separate PR?
-
 		if ( is_wp_error( $response ) ) {
 			$error_message = sprintf(
 				/* translators: %s is the error message. */

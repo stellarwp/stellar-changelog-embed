@@ -33,8 +33,6 @@ class GitHub_API {
 	/**
 	 * Get file content from GitHub repository.
 	 *
-	 * TODO: Test with public and non-public (with a token and without a token) repositories.
-	 *
 	 * @since 2.0.0
 	 *
 	 * @param string $owner     Repository owner/organization.
