@@ -70,30 +70,10 @@ class Changelog_Parser {
 				$type    = trim( $matches[1] );
 				$content = trim( $matches[2] );
 
-				global $shortcode_tags;
-
-				$registered_shortcodes = array_map(
-					function ( $tag ) {
-						return preg_quote( $tag, '/' );
-					},
-					array_keys( $shortcode_tags )
-				);
-
-				// Escape shortcodes that exist on this site by adding extra square brackets.
-				$content = preg_replace(
-					'/\[(' . implode( '|', $registered_shortcodes ) . ')\]/',
-					'[[$1]]',
-					$content
-				);
-
-				// Wrap text in backticks with <code> tags and double-escape shortcodes.
-				$content = preg_replace_callback(
-					'/`([^`]+)`/',
-					function ( $matches ) {
-						return '<code>' . esc_html( $matches[1] ) . '</code>';
-					},
-					$content
-				);
+				$content = $this->escape_shortcodes( $content );
+				$content = $this->escape_code_blocks( $content );
+				$content = $this->convert_bold_text( $content );
+				$content = $this->convert_italic_text( $content );
 
 				$change = [
 					'type'    => $type,
@@ -107,5 +87,94 @@ class Changelog_Parser {
 		}
 
 		return $changelog_data;
+	}
+
+	/**
+	 * Escapes registered shortcodes that are used in the content.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param  string $content Content to escape.
+	 *
+	 * @return string          Escaped content.
+	 */
+	private function escape_shortcodes( string $content ): string {
+		global $shortcode_tags;
+
+		$registered_shortcodes = array_map(
+			function ( $tag ) {
+				return preg_quote( $tag, '/' );
+			},
+			array_keys( $shortcode_tags )
+		);
+
+		return (string) preg_replace(
+			'/\[(' . implode( '|', $registered_shortcodes ) . ')\]/',
+			'[[$1]]',
+			$content
+		);
+	}
+
+	/**
+	 * Escapes code blocks in the content and wraps them in <code> tags.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param  string $content Content to escape.
+	 *
+	 * @return string          Escaped content.
+	 */
+	private function escape_code_blocks( string $content ): string {
+		return (string) preg_replace_callback(
+			'/`{1,3}([^`]+)`{1,3}/',
+			function ( $matches ) {
+				$is_multiline = strpos( $matches[0], '```' ) !== false;
+				$code         = esc_html( trim( $matches[1] ) );
+
+				if ( $is_multiline ) {
+					$code = preg_replace( '/\n/', '<br />', $code );
+
+					return "\n\n" . '<code class="stellar-changelog-embed__code stellar-changelog-embed__code--multiline">' . $code . '</code>' . "\n\n";
+				}
+
+				return '<code class="stellar-changelog-embed__code">' . $code . '</code>';
+			},
+			$content
+		);
+	}
+
+	/**
+	 * Converts bold text in the content to <strong> tags.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param  string $content Content to convert.
+	 *
+	 * @return string          Converted content.
+	 */
+	private function convert_bold_text( string $content ): string {
+		return (string) preg_replace(
+			'/\*\*([^\*]+)\*\*/',
+			'<strong>$1</strong>',
+			$content
+		);
+	}
+
+	/**
+	 * Converts italic text styled as *italic* in the content to <em> tags.
+	 * _italic_ text is not converted, as attempting to account for this would be too complex as that pattern would often have false positives with things like action and hook names.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param  string $content Content to convert.
+	 *
+	 * @return string          Converted content.
+	 */
+	private function convert_italic_text( string $content ): string {
+		return (string) preg_replace(
+			'/(?<!\*)\*([^\*]+)\*(?!\*)/',
+			'<em>$1</em>',
+			$content
+		);
 	}
 }

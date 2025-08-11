@@ -287,7 +287,7 @@
 }
 
 /* Code formatting */
-.stellar-changelog-embed__change code {
+.stellar-changelog-embed__change .stellar-changelog-embed__code {
     background-color: #f1f5f9;
     padding: 0.125rem 0.375rem;
     border-radius: 0.25rem;
@@ -308,6 +308,13 @@
         overflow-wrap: anywhere;
         line-height: 1.4;
     }
+}
+
+.stellar-changelog-embed__change .stellar-changelog-embed__code--multiline {
+    display: block;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 /* Bold and italic formatting */
