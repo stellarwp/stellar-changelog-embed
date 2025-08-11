@@ -1,0 +1,9 @@
+= [2.0.0] 2025-08-11 =
+
+* Feature - Breaking change! The changelog is now fetched from Github repositories. No need to update the files anymore. If you previously had the block configured, it will need to be reconfigured to be pointed to GitHub.
+* Feature - A GitHub Personal Access Token can be entered under Settings -> StellarWP Changelog Viewer to increase rate limits.
+* Tweak - Added filters: `stellar_changelog_embed_cache_duration`, `stellar_changelog_embed_supported_file_types`, `stellar_changelog_embed_type_plurals`.
+
+= [1.0.0] 2024-10-03 =
+
+* Feature - Initial release.
