@@ -1,0 +1,8 @@
+= [2.0.0] 2025-08-11 =
+
+- Feature - Breaking change! The changelog is now fetched from Github repositories. No need to update the files anymore.
+- Tweak - Added filters: `stellar_changelog_embed_cache_duration`, `stellar_changelog_embed_supported_file_types`, `stellar_changelog_embed_type_plurals`.
+
+= [1.0.0] 2024-10-03 =
+
+- Initial release.
