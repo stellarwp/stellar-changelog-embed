@@ -107,7 +107,7 @@ class Settings {
 					'<a href="https://github.com/settings/tokens" target="_blank">' . __( 'here', 'stellar-changelog-embed' ) . '</a>'
 				) .
 				'<ul style="list-style-type: disc; margin-left: 1em;">' .
-					'<li>' . __( 'Fine-grained personal access tokens: You will need the <code>Contents</code> scope set to <code>Read-only</code>.', 'stellar-changelog-embed' ) . '</li>' .
+					'<li>' . __( 'Preferred: Fine-grained personal access tokens: You will need the <code>Contents</code> scope set to <code>Read-only</code>.', 'stellar-changelog-embed' ) . '</li>' .
 					'<li>' . __( 'Classic personal access tokens: The full <code>repo</code> scope is required for private repositories. If only public repositories are needed, the <code>public_repo</code> scope is sufficient.', 'stellar-changelog-embed' ) . '</li>' .
 				'</ul>',
 			]
