@@ -4,7 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { TextControl, PanelBody, __experimentalNumberControl as NumberControl } from '@wordpress/components';
+import { TextControl, PanelBody } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
@@ -61,18 +61,18 @@ export default function Edit(props) {
 						placeholder="main"
 					/>
 
-					// TODO: Figure out why these two controls always show 5 even when saved to a different value.
-
-					<NumberControl
+					<TextControl
+						type="number"
 						label={__("Max Versions", "stellar-changelog-embed")}
 						value={attributes.max_versions}
-						onChange={(newMaxVersions) => setAttributes({ max_versions: newMaxVersions })}
+						onChange={(newMaxVersions) => setAttributes({ max_versions: parseInt(newMaxVersions) || 5 })}
 					/>
 
-					<NumberControl
+					<TextControl
+						type="number"
 						label={__("Per-Page", "stellar-changelog-embed")}
 						value={attributes.per_page}
-						onChange={(newPerPage) => setAttributes({ per_page: newPerPage })}
+						onChange={(newPerPage) => setAttributes({ per_page: parseInt(newPerPage) || 5 })}
 					/>
 				</PanelBody>
 			</InspectorControls>
