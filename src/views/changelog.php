@@ -175,7 +175,6 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 								>
 									<?php foreach ( $changes as $change ) : ?>
 										<li class="stellar-changelog-embed__change">
-											<?php // TODO: Investigate what the previous code did here. ?>
 											<?php echo wp_kses_post( $change ); ?>
 										</li>
 									<?php endforeach; ?>
