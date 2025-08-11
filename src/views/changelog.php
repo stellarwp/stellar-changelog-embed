@@ -175,19 +175,6 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 								>
 									<?php foreach ( $changes as $change ) : ?>
 										<li class="stellar-changelog-embed__change">
-											<?php
-											// Here we had the code to make some things a bit nicer, maybe we want to keep something?
-											
-											// Convert backticks to HTML code tags
-											// This handles both single backticks `code` and multiple backticks
-											// $content = preg_replace('/`([^`]+)`/', '<code>$1</code>', $content);
-												
-											// Convert **bold** text to <strong> tags
-											// $content = preg_replace('/\*\*([^\*]+)\*\*/', '<strong>$1</strong>', $content);
-											
-											// Convert *italic* text to <em> tags (but not if it's part of ** pattern)
-											// $content = preg_replace('/(?<!\*)\*([^\*]+)\*(?!\*)/', '<em>$1</em>', $content);
-											?>
 											<?php echo wp_kses_post( $change ); ?>
 										</li>
 									<?php endforeach; ?>
