@@ -20,8 +20,6 @@ define( 'STELLAR_CHANGELOG_EMBED_VERSION', '2.0.0' );
 add_action(
 	'init',
 	static function () {
-		// TODO: Set up a proper ServiceProvider.
-
 		Plugin::instance()->register();
 
 		Settings::instance()->hooks();

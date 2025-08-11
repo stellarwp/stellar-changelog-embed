@@ -232,7 +232,6 @@ class Settings {
 
 	/**
 	 * Renders the JavaScript for the settings page.
-	 * TODO: Move to a JS file.
 	 *
 	 * @since 2.0.0
 	 *
