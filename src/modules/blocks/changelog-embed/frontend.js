@@ -26,11 +26,11 @@
         });
         
         // Handle version header clicks.
-        $('.stellar-changelog-embed__version-header').on('click', function() {
-            const $header = $(this);
+        $('.stellar-changelog-embed__toggle').on('click touch', function() {
+            const $header = $(this).closest('.stellar-changelog-embed__version-header');
             const $version = $header.closest('.stellar-changelog-embed__version');
             const $content = $version.find('.stellar-changelog-embed__version-content');
-            const $toggle = $header.find('.stellar-changelog-embed__toggle');
+            const $toggle = $(this);
             
             // Toggle display.
             $content.slideToggle(200);
@@ -63,8 +63,8 @@
         });
         
         // Handle section header clicks.
-        $('.stellar-changelog-embed__section-header').on('click', function() {
-            const $header = $(this);
+        $('.stellar-changelog-embed__section-count').on('click touch', function() {
+            const $header = $(this).closest('.stellar-changelog-embed__section-header');
             const $section = $header.closest('.stellar-changelog-embed__section');
             const $changes = $section.find('.stellar-changelog-embed__changes');
             
@@ -72,8 +72,8 @@
             $changes.slideToggle(200);
             
             // Toggle aria attribute.
-            const isExpanded = $header.attr('aria-expanded') === 'true';
-            $header.attr('aria-expanded', !isExpanded);
+            const isExpanded = $(this).attr('aria-expanded') === 'true';
+            $(this).attr('aria-expanded', !isExpanded);
         });
         
         // Set initial states based on stored preferences.
@@ -181,8 +181,8 @@
         $nextBtn.prop('disabled', currentPage >= totalPages);
         
         // Update number buttons.
-        $numberBtns.removeClass('active');
-        $numberBtns.filter(`[data-page="${currentPage}"]`).addClass('active');
+        $numberBtns.removeClass('active').removeAttr('aria-current');
+        $numberBtns.filter(`[data-page="${currentPage}"]`).addClass('active').attr('aria-current', 'page');
     }
     
     /**

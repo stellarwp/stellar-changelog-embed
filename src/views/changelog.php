@@ -37,7 +37,11 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 			
 			<?php if ( $total_pages > 1 ) : ?>
 				<div class="stellar-changelog-embed__pagination-info">
-					<span class="stellar-changelog-embed__pagination-text">
+					<span
+						aria-live="polite"
+						class="stellar-changelog-embed__pagination-text"
+						id="stellar-changelog-embed__pagination-text"
+					>
 						<?php esc_html_e( 'Page', 'stellar-changelog-embed' ); ?> 
 						<span class="stellar-changelog-embed__current-page">1</span> 
 						<?php esc_html_e( 'of', 'stellar-changelog-embed' ); ?> 
@@ -49,7 +53,10 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 		</div>
 		
 		<div class="stellar-changelog-embed__versions">
-			<?php foreach ( $changelog_data as $index => $version ) : ?>
+			<?php
+			foreach ( $changelog_data as $index => $version ) :
+				$version_id = wp_generate_uuid4();
+				?>
 					<div 
 					class="stellar-changelog-embed__version" 
 						data-version-index="<?php echo esc_attr( $index ); ?>" 
@@ -88,15 +95,31 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 							<?php endif; ?>
 						</div>
 						
-						<button type="button" class="stellar-changelog-embed__toggle" aria-expanded="true">
+						<button
+							aria-expanded="true"
+							aria-controls="stellar-changelog-embed__version-content--<?php echo esc_attr( $version_id ); ?>"
+							class="stellar-changelog-embed__toggle"
+							type="button"
+						>
 							<span class="screen-reader-text">
-								<?php esc_html_e( 'Toggle changelog details', 'stellar-changelog-embed' ); ?>
+								<?php
+								echo esc_html(
+									sprintf(
+										// translators: %s: Version number.
+										__( 'Toggle version %s details.', 'stellar-changelog-embed' ),
+										$version['version']
+									)
+								);
+								?>
 							</span>
 							<span class="stellar-changelog-embed__toggle-icon" aria-hidden="true"></span>
 						</button>
 					</div>
 					
-					<div class="stellar-changelog-embed__version-content">
+					<div
+						class="stellar-changelog-embed__version-content"
+						id="stellar-changelog-embed__version-content--<?php echo esc_attr( $version_id ); ?>"
+					>
 						<?php
 						// Group changes by type.
 						$grouped_changes = [];
@@ -115,12 +138,41 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 									<span class="stellar-changelog-embed__section-title">
 										<?php echo esc_html( Helper::pluralize_type( $type ) ); ?>
 									</span>
-									<span class="stellar-changelog-embed__section-count">
-										<?php echo count( $changes ); ?>
-									</span>
+									<button
+										aria-expanded="true"
+										aria-controls="stellar-changelog-embed__changes--<?php echo esc_attr( $version_id ); ?>-<?php echo esc_attr( strtolower( $type ) ); ?>"
+										class="stellar-changelog-embed__section-count"
+										type="button"
+									>
+										<span class="screen-reader-text">
+											<?php
+											echo esc_html(
+												sprintf(
+													// translators: %1$d: Number of changes. %2$s: Section title singular. %3$s: Section title plural. %4$s: Version number.
+													_n( // phpcs:ignore WordPress.WP.I18n.MismatchedPlaceholders -- It's intentional to allow proper translation.
+														'Toggle %1$d %2$s for version %4$s.',
+														'Toggle %1$d %3$s for version %4$s.',
+														count( $changes ),
+														'stellar-changelog-embed'
+													),
+													count( $changes ),
+													$type,
+													Helper::pluralize_type( $type ),
+													$version['version']
+												)
+											);
+											?>
+										</span>
+										<span aria-hidden="true">
+											<?php echo esc_html( count( $changes ) ); ?>
+										</span>
+									</button>
 								</h4>
 								
-								<ul class="stellar-changelog-embed__changes">
+								<ul
+									class="stellar-changelog-embed__changes"
+									id="stellar-changelog-embed__changes--<?php echo esc_attr( $version_id ); ?>-<?php echo esc_attr( strtolower( $type ) ); ?>"
+								>
 									<?php foreach ( $changes as $change ) : ?>
 										<li class="stellar-changelog-embed__change">
 											<?php // TODO: Investigate what the previous code did here. ?>
@@ -136,39 +188,55 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 		</div>
 		
 		<?php if ( $total_pages > 1 ) : ?>
-			<div class="stellar-changelog-embed__pagination">
-				<div class="stellar-changelog-embed__pagination-controls">
-					<button type="button" class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--prev" disabled>
-						<span aria-hidden="true">&laquo;</span>
-						<span class="screen-reader-text">
-							<?php esc_html_e( 'Previous page', 'stellar-changelog-embed' ); ?>
-						</span>
-					</button>
-					
-					<div class="stellar-changelog-embed__pagination-numbers">
-						<?php for ( $i = 1; $i <= $total_pages; $i++ ) : ?>
+			<nav
+				class="stellar-changelog-embed__pagination"
+				aria-label="<?php esc_html_e( 'Pagination for version details.', 'stellar-changelog-embed' ); ?>"
+				aria-labelledby="stellar-changelog-embed__pagination stellar-changelog-embed__pagination-text"
+				id="stellar-changelog-embed__pagination"
+			>
+				<ul class="stellar-changelog-embed__pagination-controls">
+					<li>
+						<button type="button" class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--prev" disabled>
+							<span aria-hidden="true">&laquo;</span>
+							<span class="screen-reader-text">
+								<?php esc_html_e( 'Previous page', 'stellar-changelog-embed' ); ?>
+							</span>
+						</button>
+					</li>
+
+					<?php for ( $i = 1; $i <= $total_pages; $i++ ) : ?>
+						<li>
 							<button
 								type="button" 
 								class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--number <?php echo $i === 1 ? 'stellar-changelog-embed__pagination-btn--active' : ''; ?>" 
 								data-page="<?php echo esc_attr( $i ); ?>"
+								<?php if ( $i === 1 ) : ?>
+									aria-current="page"
+								<?php endif; ?>
 							>
+								<span class="screen-reader-text">
+									<?php esc_html_e( 'Page', 'stellar-changelog-embed' ); ?> 
+								</span>
+
 								<?php echo esc_html( $i ); ?>
 							</button>
-						<?php endfor; ?>
-					</div>
+						</li>
+					<?php endfor; ?>
 
-					<button
-						class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--next" 
-						<?php echo $total_pages <= 1 ? 'disabled' : ''; ?>
-						type="button" 
-					>
-						<span aria-hidden="true">&raquo;</span>
-						<span class="screen-reader-text">
-							<?php esc_html_e( 'Next page', 'stellar-changelog-embed' ); ?>
-						</span>
-					</button>
-				</div>
-			</div>
+					<li>
+						<button
+							class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--next" 
+							<?php echo $total_pages <= 1 ? 'disabled' : ''; ?>
+							type="button" 
+						>
+							<span aria-hidden="true">&raquo;</span>
+							<span class="screen-reader-text">
+								<?php esc_html_e( 'Next page', 'stellar-changelog-embed' ); ?>
+							</span>
+						</button>
+					</li>
+				</ul>
+			</nav>
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
