@@ -2,27 +2,11 @@
  * Changelog Viewer Styles
  */
 
-.stellar-changelog-embed__viewer {
+.stellar-changelog-embed {
     max-width: 100%;
     margin: 0 auto;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: #333;
-}
-
-/* Changelog header */
-.stellar-changelog-embed__viewer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.stellar-changelog-embed__viewer-title {
-    font-size: 1.8rem;
-    margin: 0;
-    font-weight: 600;
 }
 
 .stellar-changelog-embed__pagination-info {
@@ -33,6 +17,10 @@
 .stellar-changelog-embed__pagination-info .current-page {
     font-weight: 600;
     color: #1e40af;
+}
+
+.stellar-changelog-embed__versions {
+    margin-top: 1rem;
 }
 
 /* Version container */
@@ -61,7 +49,7 @@
     gap: 0.5rem;
 }
 
-.stellar-changelog-embed__version-title {
+.stellar-changelog-embed__version-info .stellar-changelog-embed__version-title {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 600;
@@ -278,7 +266,7 @@
 }
 
 /* Error messages */
-.stellar-changelog-embed__viewer-error {
+.stellar-changelog-embed__error {
     padding: 1rem;
     border-left: 4px solid #ef4444;
     background-color: #fee2e2;
@@ -327,7 +315,7 @@
 }
 
 /* Editor specific styles */
-.stellar-changelog-embed__viewer-editor .stellar-changelog-embed__viewer-preview-note {
+.stellar-changelog-embed__editor .stellar-changelog-embed__preview-note {
     background-color: #f0f9ff;
     border-left: 4px solid #0ea5e9;
     padding: 0.75rem;
@@ -353,7 +341,7 @@
         padding-right: 2rem;
     }
     
-    .stellar-changelog-embed__viewer-header {
+    .stellar-changelog-embed__header {
         flex-direction: column;
         align-items: flex-start;
     }
