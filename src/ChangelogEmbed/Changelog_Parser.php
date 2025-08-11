@@ -65,9 +65,9 @@ class Changelog_Parser {
 
 			// Process change entries (e.g., "* Fix - Fixed an issue...").
 			if ( $current_version !== null &&
-				preg_match( '/^\*\s*([\w\-]+)\s*-\s*(.+)$/i', $line, $matches ) ) {
+				preg_match( '/^(?:[\*|-]\s*)(?:([\w\-]+)\s*-)?\s*(.+)$/i', $line, $matches ) ) {
 
-				$type    = trim( $matches[1] );
+				$type    = ! empty( trim( $matches[1] ) ) ? trim( $matches[1] ) : __( 'Change', 'stellar-changelog-embed' );
 				$content = trim( $matches[2] );
 
 				$content = $this->escape_shortcodes( $content );
