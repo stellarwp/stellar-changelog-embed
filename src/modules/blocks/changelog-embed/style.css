@@ -100,7 +100,8 @@
     text-transform: uppercase;
 }
 
-.stellar-changelog-embed__toggle {
+.stellar-changelog-embed__toggle, .stellar-changelog-embed__toggle:hover, .stellar-changelog-embed__toggle:focus {
+    all: unset;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -127,8 +128,7 @@
     fill: currentColor;
 }
 
-.stellar-changelog-embed__toggle[aria-expanded="true"] .stellar-changelog-embed__toggle-icon-svg,
-.stellar-changelog-embed__toggle--section[aria-expanded="true"] .stellar-changelog-embed__toggle-icon-svg {
+.stellar-changelog-embed__toggle[aria-expanded="true"] .stellar-changelog-embed__toggle-icon-svg {
     transform: rotate(180deg);
 }
 
