@@ -307,10 +307,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    .stellar-changelog-embed__version-info {
-        padding-right: 2rem;
-    }
-    
+    .stellar-changelog-embed__version-header,
     .stellar-changelog-embed__header {
         flex-direction: column;
         align-items: flex-start;
@@ -326,6 +323,11 @@
     
     .stellar-changelog-embed__pagination-numbers {
         order: -1;
+    }
+
+    .stellar-changelog-embed__version-date-container {
+        justify-content: space-between;
+        width: 100%;
     }
 }
 
