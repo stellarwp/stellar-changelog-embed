@@ -167,12 +167,21 @@
 }
 
 .stellar-changelog-embed__section-count {
-    /* TODO: Set colors depending on the type. */
-    border-radius: 9999px;
-    min-width: 30px;
-    padding: 4px 12px;
-    justify-content: center;
     align-items: center;
+    aspect-ratio: 1;
+    background-color: #F3F8FF;
+    border-radius: 50%;
+    color: #0E2A90;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: 1px;
+    line-height: 1;
+    min-width: 30px;
+    padding: 4px 8px;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 /* Change list */
