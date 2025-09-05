@@ -99,7 +99,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 							<button
 								aria-expanded="true"
 								aria-controls="stellar-changelog-embed__version-content--<?php echo esc_attr( $version_id ); ?>"
-								class="stellar-changelog-embed__toggle"
+								class="stellar-changelog-embed__toggle stellar-changelog-embed__toggle--version"
 								type="button"
 							>
 								<span class="screen-reader-text">
@@ -156,7 +156,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 										</span>
 									</div>
 
-                                    <?php // TODO: Fix rotation of the icon. ?>
+									<?php // TODO: Fix rotation of the icon. ?>
 									<button
 										aria-expanded="true"
 										aria-controls="stellar-changelog-embed__changes--<?php echo esc_attr( $version_id ); ?>-<?php echo esc_attr( strtolower( $type ) ); ?>"

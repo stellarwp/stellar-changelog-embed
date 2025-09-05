@@ -26,7 +26,7 @@
         });
         
         // Handle version header clicks.
-        $('.stellar-changelog-embed__toggle').on('click touch', function() {
+        $('.stellar-changelog-embed__toggle--version').on('click touch', function() {
             const $header = $(this).closest('.stellar-changelog-embed__version-header');
             const $version = $header.closest('.stellar-changelog-embed__version');
             const $content = $version.find('.stellar-changelog-embed__version-content');
