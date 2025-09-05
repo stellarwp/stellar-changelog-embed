@@ -365,3 +365,24 @@
     border-color: #2563eb;
     color: #ffffff !important;
 }
+
+/* Type-specific colors */
+.stellar-changelog-embed__section[data-type="Fix"] .stellar-changelog-embed__section-count {
+    background-color: #fecaca;
+    color: #7f1d1d;
+}
+
+.stellar-changelog-embed__section[data-type="Tweak"] .stellar-changelog-embed__section-count {
+    background-color: #bbf7d0;
+    color: #0f5132;
+}
+
+.stellar-changelog-embed__section[data-type="Feature"] .stellar-changelog-embed__section-count {
+    background-color: #c7d2fe;
+    color: #1e1b4b;
+}
+
+.stellar-changelog-embed__section[data-type="Security"] .stellar-changelog-embed__section-count {
+    background-color: #fde68a;
+    color: #78350f;
+}
