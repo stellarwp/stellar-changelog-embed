@@ -63,7 +63,7 @@
         });
         
         // Handle section header clicks.
-        $('.stellar-changelog-embed__section-count').on('click touch', function() {
+        $('.stellar-changelog-embed__toggle--section').on('click touch', function() {
             const $header = $(this).closest('.stellar-changelog-embed__section-header');
             const $section = $header.closest('.stellar-changelog-embed__section');
             const $changes = $section.find('.stellar-changelog-embed__changes');

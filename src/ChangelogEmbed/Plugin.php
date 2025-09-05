@@ -97,6 +97,21 @@ class Plugin {
 			$allowed_html,
 			[
 				'div' => [],
+				'svg' => [
+					'aria-hidden' => true,
+					'class'       => true,
+					'height'      => true,
+					'role'        => true,
+					'viewBox'     => true,
+					'width'       => true,
+					'xmlns'       => true,
+				],
+				'path' => [
+					'clip-rule' => true,
+					'd'         => true,
+					'fill'      => true,
+					'fill-rule' => true,
+				],
 			]
 		);
 

@@ -46,32 +46,33 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem;
+}
+
+.stellar-changelog-embed__version-date-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .stellar-changelog-embed__version-info .stellar-changelog-embed__version-title {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1a202c;
+    color: #1A202C;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.56px;
+    line-height: 42px;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: capitalize;
 }
 
 .stellar-changelog-embed__version-date {
-    color: #64748b;
+    color: #4A4A68;
     font-size: 0.875rem;
-    display: flex;
-    align-items: center;
-}
-
-.stellar-changelog-embed__version-date::before {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 0.25rem;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4rem;
 }
 
 .stellar-changelog-embed__version-tag {
@@ -83,9 +84,20 @@
     text-transform: uppercase;
 }
 
-.stellar-changelog-embed__version-latest {
-    background-color: #ebf5ff;
-    color: #1e40af;
+.stellar-changelog-embed__version-tag--latest {
+    align-items: center;
+    background: #DCE1E8;
+    border-radius: 6px;
+    color: #333;
+    display: flex;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    gap: --ld-spacer-fixed-0;
+    letter-spacing: 1px;
+    line-height: 20px;
+    padding: 4px 8px;
+    text-transform: uppercase;
 }
 
 .stellar-changelog-embed__toggle {
@@ -103,49 +115,32 @@
 }
 
 .stellar-changelog-embed__toggle-icon {
+    color: #4A4A68;
     display: block;
-    width: 14px;
-    height: 14px;
     position: relative;
-}
-
-.stellar-changelog-embed__toggle-icon::before,
-.stellar-changelog-embed__toggle-icon::after {
-    content: '';
-    position: absolute;
-    background-color: currentColor;
     transition: transform 0.2s;
 }
 
-.stellar-changelog-embed__toggle-icon::before {
-    top: 6px;
-    left: 0;
-    width: 14px;
-    height: 2px;
+.stellar-changelog-embed__toggle-icon-svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
 }
 
-.stellar-changelog-embed__toggle-icon::after {
-    top: 0;
-    left: 6px;
-    width: 2px;
-    height: 14px;
-}
-
-.stellar-changelog-embed__toggle[aria-expanded="true"] .stellar-changelog-embed__toggle-icon::after {
-    transform: rotate(90deg);
+.stellar-changelog-embed__toggle[aria-expanded="true"] .stellar-changelog-embed__toggle-icon-svg,
+.stellar-changelog-embed__toggle--section[aria-expanded="true"] .stellar-changelog-embed__toggle-icon-svg {
+    transform: rotate(180deg);
 }
 
 /* Version content */
 .stellar-changelog-embed__version-content {
-    padding: 1rem;
+    padding: 1rem 32px;
     background-color: #fff;
 }
 
 /* Sections (grouped by type) */
 .stellar-changelog-embed__section {
     margin-bottom: 1.5rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.25rem;
     overflow: hidden;
 }
 
@@ -154,33 +149,31 @@
 }
 
 .stellar-changelog-embed__section-header {
-    margin: 0;
-    padding: 0.75rem 1rem;
-    background-color: #f8fafc;
-    font-size: 1rem;
-    font-weight: 600;
-    display: flex;
     align-items: center;
+    border-bottom: 1px solid #DCE1E8;
+    color: #1A202C;
+    display: flex;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 2.25rem;
+    text-transform: capitalize;
+    gap: 0.5rem;
     justify-content: space-between;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0.375rem 0;
     user-select: none;
 }
-
-.stellar-changelog-embed__section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #2d3748;
 }
 
 .stellar-changelog-embed__section-count {
-    background-color: #e2e8f0;
-    color: #4a5568;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.125rem 0.375rem;
+    /* TODO: Set colors depending on the type. */
     border-radius: 9999px;
-    min-width: 1.5rem;
-    text-align: center;
+    min-width: 30px;
+    padding: 4px 12px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Change list */
@@ -212,59 +205,6 @@
     background-color: #a0aec0;
 }
 
-/* Type-specific colors */
-.stellar-changelog-embed__section[data-type="Fix"] .stellar-changelog-embed__section-header {
-    background-color: #fee2e2;
-}
-
-.stellar-changelog-embed__section[data-type="Fix"] .stellar-changelog-embed__section-title {
-    color: #991b1b;
-}
-
-.stellar-changelog-embed__section[data-type="Fix"] .stellar-changelog-embed__section-count {
-    background-color: #fecaca;
-    color: #b91c1c;
-}
-
-.stellar-changelog-embed__section[data-type="Tweak"] .stellar-changelog-embed__section-header {
-    background-color: #dcfce7;
-}
-
-.stellar-changelog-embed__section[data-type="Tweak"] .stellar-changelog-embed__section-title {
-    color: #166534;
-}
-
-.stellar-changelog-embed__section[data-type="Tweak"] .stellar-changelog-embed__section-count {
-    background-color: #bbf7d0;
-    color: #15803d;
-}
-
-.stellar-changelog-embed__section[data-type="Feature"] .stellar-changelog-embed__section-header {
-    background-color: #e0e7ff;
-}
-
-.stellar-changelog-embed__section[data-type="Feature"] .stellar-changelog-embed__section-title {
-    color: #3730a3;
-}
-
-.stellar-changelog-embed__section[data-type="Feature"] .stellar-changelog-embed__section-count {
-    background-color: #c7d2fe;
-    color: #4338ca;
-}
-
-.stellar-changelog-embed__section[data-type="Security"] .stellar-changelog-embed__section-header {
-    background-color: #fef3c7;
-}
-
-.stellar-changelog-embed__section[data-type="Security"] .stellar-changelog-embed__section-title {
-    color: #92400e;
-}
-
-.stellar-changelog-embed__section[data-type="Security"] .stellar-changelog-embed__section-count {
-    background-color: #fde68a;
-    color: #b45309;
-}
-
 /* Error messages */
 .stellar-changelog-embed__error {
     padding: 1rem;
@@ -283,7 +223,6 @@
     font-size: 0.875em;
     color: #e11d48;
     border: 1px solid #e2e8f0;
-    white-space: nowrap;
     overflow-wrap: break-word;
     word-break: break-all;
 }
@@ -291,10 +230,10 @@
 /* Mobile responsive code blocks */
 @media (max-width: 768px) {
     .stellar-changelog-embed__change code {
+        line-height: 1.4;
+        overflow-wrap: anywhere;
         white-space: normal;
         word-break: break-all;
-        overflow-wrap: anywhere;
-        line-height: 1.4;
     }
 }
 
@@ -326,17 +265,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    .stellar-changelog-embed__version-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .stellar-changelog-embed__toggle {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-    }
-    
     .stellar-changelog-embed__version-info {
         padding-right: 2rem;
     }
@@ -347,8 +275,11 @@
     }
     
     .stellar-changelog-embed__pagination-controls {
-        flex-direction: column;
         gap: 0.75rem;
+    }
+
+    .stellar-changelog-embed__pagination-btn-container.stellar-changelog-embed__pagination-btn-container--number {
+        display: none;
     }
     
     .stellar-changelog-embed__pagination-numbers {
