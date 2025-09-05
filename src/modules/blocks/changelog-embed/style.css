@@ -102,17 +102,36 @@
 
 .stellar-changelog-embed__toggle, .stellar-changelog-embed__toggle:hover, .stellar-changelog-embed__toggle:focus {
     all: unset;
-    background: transparent;
-    border: none;
+    border-radius: 4px;
+    border: transparent 2px solid;
+    color: #4A4A68;
     cursor: pointer;
-    padding: 0.5rem;
-    color: #64748b;
+    line-height: 1;
+    outline-offset: 2px;
+    outline-style: none;
+    outline-width: 2px;
+    padding: 0.5rem 8px;
     transition: transform 0.2s;
 }
 
-.stellar-changelog-embed__toggle:focus {
+.stellar-changelog-embed__toggle:hover {
+    background-color: #F3F8FF;
+    border-color: #235AF3;
+    color: #235AF3;
+}
+
+.stellar-changelog-embed__toggle:focus:not(:hover) {
+    background-color: #F3F8FF;
+    border-color: #0E2A90;
+    color: #0E2A90;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
+}
+
+.stellar-changelog-embed__toggle:focus:hover {
+    background-color: transparent;
+    border-color: #235AF3;
+    color: #4A4A68;
+    outline-color: #f3f8ff;
 }
 
 .stellar-changelog-embed__toggle-icon {
@@ -141,7 +160,6 @@
 /* Sections (grouped by type) */
 .stellar-changelog-embed__section {
     margin-bottom: 1.5rem;
-    overflow: hidden;
 }
 
 .stellar-changelog-embed__section:last-child {
