@@ -183,8 +183,8 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 											?>
 										</span>
 										<span class="stellar-changelog-embed__toggle-icon" aria-hidden="true">
-											<svg aria-hidden="true" class="stellar-changelog-embed__toggle-icon-svg" height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" clip-rule="evenodd" d="M4.33474 8.36612C4.74672 7.91551 5.39498 7.88085 5.84331 8.26213L5.95098 8.36612L12 14.9813L18.049 8.36612C18.461 7.91551 19.1093 7.88085 19.5576 8.26213L19.6653 8.36612C20.0772 8.81672 20.1089 9.52576 19.7603 10.0161L19.6653 10.1339L12.8081 17.6339C12.3961 18.0845 11.7479 18.1192 11.2995 17.7379L11.1919 17.6339L4.33474 10.1339C3.88842 9.64573 3.88842 8.85427 4.33474 8.36612Z" fill="currentColor"></path>
+											<svg aria-hidden="true" class="stellar-changelog-embed__toggle-icon-svg"  width="24" height="24" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path fill-rule="evenodd" clip-rule="evenodd" d="M5.8674 8.29289C6.19698 7.93241 6.71559 7.90468 7.07426 8.2097L7.16039 8.29289L11.9996 13.585L16.8388 8.29289C17.1684 7.93241 17.687 7.90468 18.0457 8.2097L18.1318 8.29289C18.4614 8.65338 18.4868 9.22061 18.2079 9.6129L18.1318 9.70711L12.6461 15.7071C12.3165 16.0676 11.7979 16.0953 11.4392 15.7903L11.3531 15.7071L5.8674 9.70711C5.51035 9.31658 5.51035 8.68342 5.8674 8.29289Z" fill="currentColor"/>
 											</svg>
 										</span>
 									</button>
