@@ -20,11 +20,6 @@
 	 * @return {void}
      */
     function initChangelog() {
-        // Initialize pagination for each changelog viewer.
-        $('.stellar-changelog-embed').each(function() {
-            initPagination($(this));
-        });
-        
         // Handle version header clicks.
         $('.stellar-changelog-embed__toggle--version').on('click touch', function() {
             const $header = $(this).closest('.stellar-changelog-embed__version-header');
@@ -38,28 +33,6 @@
             // Update aria attributes.
             const isExpanded = $toggle.attr('aria-expanded') === 'true';
             $toggle.attr('aria-expanded', !isExpanded);
-            
-            // Store expanded state in browser storage.
-            const version = $header.data('version');
-            if (version) {
-                const expandedVersions = getExpandedVersions();
-                
-                if (isExpanded) {
-                    // Remove from expanded versions.
-                    const index = expandedVersions.indexOf(version);
-                    if (index !== -1) {
-                        expandedVersions.splice(index, 1);
-                    }
-                } else {
-                    // Add to expanded versions.
-                    if (!expandedVersions.includes(version)) {
-                        expandedVersions.push(version);
-                    }
-                }
-                
-                // Save updated list.
-                saveExpandedVersions(expandedVersions);
-            }
         });
         
         // Handle section header clicks.
@@ -75,9 +48,11 @@
             const isExpanded = $(this).attr('aria-expanded') === 'true';
             $(this).attr('aria-expanded', !isExpanded);
         });
-        
-        // Set initial states based on stored preferences.
-        restoreExpandedVersions();
+
+        // Initialize pagination for each changelog viewer.
+        $('.stellar-changelog-embed').each(function() {
+            initPagination($(this));
+        });
     }
     
     /**
@@ -92,6 +67,9 @@
     function initPagination($viewer) {
         const versionsPerPage = parseInt($viewer.data('versions-per-page')) || 5;
         const totalVersions = parseInt($viewer.data('total-versions')) || 0;
+
+        // Show first page initially.
+        showPage($viewer, 1, versionsPerPage);
         
         if (totalVersions <= versionsPerPage) {
             return; // No pagination needed.
@@ -99,9 +77,6 @@
         
         $viewer.data('current-page', 1);
         const totalPages = Math.ceil(totalVersions / versionsPerPage);
-        
-        // Show first page initially.
-        showPage($viewer, 1, versionsPerPage);
         
         // Handle pagination button clicks.
         $viewer.on('click', '.stellar-changelog-embed__pagination-btn', function(e) {
@@ -148,6 +123,13 @@
             const $version = $(this);
             if (index >= startIndex && index < endIndex) {
                 $version.show();
+
+                // Ensure the first version on the page is expanded and the rest are collapsed.
+                if (index === startIndex) {
+                    $version.find('.stellar-changelog-embed__toggle--version[aria-expanded="false"]').trigger('click');
+                } else {
+                    $version.find('.stellar-changelog-embed__toggle--version[aria-expanded="true"]').trigger('click');
+                }
             } else {
                 $version.hide();
             }
@@ -183,79 +165,6 @@
         // Update number buttons.
         $numberBtns.removeClass('active').removeAttr('aria-current');
         $numberBtns.filter(`[data-page="${currentPage}"]`).addClass('active').attr('aria-current', 'page');
-    }
-    
-    /**
-     * Get array of expanded version numbers from localStorage.
-	 * 
-	 * @since 2.0.0
-     * 
-     * @return {Array} List of expanded version numbers.
-	 * 
-	 * @return void
-     */
-    function getExpandedVersions() {
-        try {
-            const stored = localStorage.getItem('stellar_changelog_embed_expanded');
-            return stored ? JSON.parse(stored) : [];
-        } catch (e) {
-            console.error('Error reading changelog preferences', e);
-            return [];
-        }
-    }
-    
-    /**
-     * Save array of expanded version numbers to localStorage.
-	 * 
-	 * @since 2.0.0
-     * 
-     * @param {Array} versions List of expanded version numbers.
-	 * 
-	 * @return void
-     */
-    function saveExpandedVersions(versions) {
-        try {
-            localStorage.setItem('stellar_changelog_embed_expanded', JSON.stringify(versions));
-        } catch (e) {
-            console.error('Error saving changelog preferences', e);
-        }
-    }
-    
-    /**
-     * Restore expanded state of versions from localStorage.
-	 * 
-	 * @since 2.0.0
-	 * 
-	 * @return void
-     */
-    function restoreExpandedVersions() {
-        const expandedVersions = getExpandedVersions();
-        
-        // First collapse all versions (except the latest if no preferences exist).
-        $('.stellar-changelog-embed__version:visible').each(function(index) {
-            const $version = $(this);
-            const $header = $version.find('.stellar-changelog-embed__version-header');
-            const $content = $version.find('.stellar-changelog-embed__version-content');
-            const $toggle = $header.find('.stellar-changelog-embed__toggle');
-            const version = $header.data('version');
-            
-            // Determine if this version should be expanded.
-            let shouldBeExpanded;
-            
-            if (expandedVersions.length > 0) {
-                // Use stored preferences.
-                shouldBeExpanded = expandedVersions.includes(version);
-            } else {
-                // Default: only expand latest version (first visible one).
-                shouldBeExpanded = index === 0;
-            }
-            
-            // Set initial state.
-            if (!shouldBeExpanded) {
-                $content.hide();
-                $toggle.attr('aria-expanded', 'false');
-            }
-        });
     }
     
     // Initialize when DOM is fully loaded.
