@@ -338,6 +338,11 @@
     border-top: 1px solid #e2e8f0;
 }
 
+.stellar-changelog-embed__pagination .stellar-changelog-embed__pagination-info {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
 .stellar-changelog-embed__pagination-controls {
 	list-style: none;
 	margin: 0;
