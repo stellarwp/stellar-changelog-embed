@@ -36,7 +36,6 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 					<span
 						aria-live="polite"
 						class="stellar-changelog-embed__pagination-text"
-						id="stellar-changelog-embed__pagination-text"
 					>
 						<?php esc_html_e( 'Page', 'stellar-changelog-embed' ); ?> 
 						<span class="stellar-changelog-embed__current-page">1</span> 
@@ -210,6 +209,20 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 				aria-labelledby="stellar-changelog-embed__pagination stellar-changelog-embed__pagination-text"
 				id="stellar-changelog-embed__pagination"
 			>
+				<div class="stellar-changelog-embed__pagination-info">
+					<span
+						aria-live="polite"
+						class="stellar-changelog-embed__pagination-text"
+						id="stellar-changelog-embed__pagination-text"
+					>
+						<?php esc_html_e( 'Page', 'stellar-changelog-embed' ); ?> 
+						<span class="stellar-changelog-embed__current-page">1</span> 
+						<?php esc_html_e( 'of', 'stellar-changelog-embed' ); ?> 
+						<span class="stellar-changelog-embed__total-pages"><?php echo esc_html( $total_pages ); ?></span> 
+						(<?php echo esc_html( $total_versions ); ?> <?php esc_html_e( 'versions', 'stellar-changelog-embed' ); ?>)
+					</span>
+				</div>
+
 				<ul class="stellar-changelog-embed__pagination-controls">
 					<li>
 						<button type="button" class="stellar-changelog-embed__pagination-btn stellar-changelog-embed__pagination-btn--prev" disabled>
