@@ -31,10 +31,6 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 		id="<?php echo esc_attr( $unique_id ); ?>"
 	>
 		<div class="stellar-changelog-embed__header">
-			<h2 class="stellar-changelog-embed__title">
-				<?php esc_html_e( 'Changelog', 'stellar-changelog-embed' ); ?>
-			</h2>
-			
 			<?php if ( $total_pages > 1 ) : ?>
 				<div class="stellar-changelog-embed__pagination-info">
 					<span
