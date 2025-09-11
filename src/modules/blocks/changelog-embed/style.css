@@ -307,8 +307,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    .stellar-changelog-embed__version-header,
-    .stellar-changelog-embed__header {
+    .stellar-changelog-embed__version-header {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -351,6 +350,8 @@
     display: flex;
     gap: 1rem;
     justify-content: center;
+    margin-left: 0 !important; /* Theme overrides */
+    padding-left: 0 !important;
 }
 
 .stellar-changelog-embed__pagination-controls li {

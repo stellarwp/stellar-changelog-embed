@@ -29,24 +29,7 @@ $unique_id         = 'changelog-' . wp_rand( 1000, 9999 ); // Generate unique ID
 		data-versions-per-page="<?php echo esc_attr( $versions_per_page ); ?>" 
 		data-total-versions="<?php echo esc_attr( $total_versions ); ?>" 
 		id="<?php echo esc_attr( $unique_id ); ?>"
-	>
-		<div class="stellar-changelog-embed__header">
-			<?php if ( $total_pages > 1 ) : ?>
-				<div class="stellar-changelog-embed__pagination-info">
-					<span
-						aria-live="polite"
-						class="stellar-changelog-embed__pagination-text"
-					>
-						<?php esc_html_e( 'Page', 'stellar-changelog-embed' ); ?> 
-						<span class="stellar-changelog-embed__current-page">1</span> 
-						<?php esc_html_e( 'of', 'stellar-changelog-embed' ); ?> 
-						<span class="stellar-changelog-embed__total-pages"><?php echo esc_html( $total_pages ); ?></span> 
-						(<?php echo esc_html( $total_versions ); ?> <?php esc_html_e( 'versions', 'stellar-changelog-embed' ); ?>)
-					</span>
-				</div>
-			<?php endif; ?>
-		</div>
-		
+	>	
 		<div class="stellar-changelog-embed__versions">
 			<?php
 			foreach ( $changelog_data as $index => $version ) :
