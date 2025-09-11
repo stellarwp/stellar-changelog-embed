@@ -350,6 +350,8 @@
     display: flex;
     gap: 1rem;
     justify-content: center;
+    margin-left: 0 !important; /* Theme overrides */
+    padding-left: 0 !important;
 }
 
 .stellar-changelog-embed__pagination-controls li {
