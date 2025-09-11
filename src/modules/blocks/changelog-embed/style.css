@@ -307,8 +307,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    .stellar-changelog-embed__version-header,
-    .stellar-changelog-embed__header {
+    .stellar-changelog-embed__version-header {
         flex-direction: column;
         align-items: flex-start;
     }

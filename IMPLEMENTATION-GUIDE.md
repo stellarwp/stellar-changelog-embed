@@ -147,7 +147,6 @@ The plugin uses BEM (Block Element Modifier) methodology for CSS classes:
 - **Modifiers**: `stellar-changelog-embed__element--modifier` (using double hyphens)
 
 Key CSS classes:
-- `.stellar-changelog-embed__header` - Main header section
 - `.stellar-changelog-embed__version` - Individual version container
 - `.stellar-changelog-embed__version-header` - Version header with toggle
 - `.stellar-changelog-embed__section` - Change type sections (Fix, Feature, etc.)
