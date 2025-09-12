@@ -20,7 +20,7 @@
 }
 
 .stellar-changelog-embed__versions {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* Version container */
@@ -333,6 +333,7 @@
 /* Pagination styles */
 .stellar-changelog-embed__pagination {
     margin-top: 2rem;
+    margin-bottom: 1rem;
     padding-top: 1.5rem;
     border-top: 1px solid #e2e8f0;
 }
