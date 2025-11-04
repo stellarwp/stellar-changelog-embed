@@ -3,23 +3,47 @@
     "apiVersion": 3,
     "name": "stellarwp/changelog-embed",
     "version": "0.1.0",
-    "title": "Stellar Changelog Embed",
+    "title": "StellarWP Changelog Embed",
     "category": "embed",
     "icon": "text",
-    "description": "Embed a changelog text file as content.",
+    "description": "Embed a StellarWP changelog text file as content.",
     "example": {},
     "supports": {
         "html": false
     },
     "keywords": [
-        "64756b"
+        "stellarwp",
+        "changelog",
+        "embed"
     ],
     "attributes": {
-        "changelogUrl": {
+        "owner": {
+            "type": "string",
+            "default": "stellarwp"
+        },
+        "repo": {
             "type": "string",
             "default": ""
+        },
+        "path": {
+            "type": "string",
+            "default": "changelog.txt"
+        },
+        "branch": {
+            "type": "string",
+            "default": "main"
+        },
+        "max_versions": {
+            "type": "integer",
+            "default": 5
+        },
+        "per_page": {   
+            "type": "integer",
+            "default": 5
         }
     },
     "textdomain": "stellarwp-changelog-embed",
-    "editorScript": "file:./index.js"
+    "editorScript": "file:./index.js",
+    "style": "file:./style-index.css",
+    "viewScript": [ "jquery", "file:./frontend.js" ]
 }

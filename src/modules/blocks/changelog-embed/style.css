@@ -1,0 +1,431 @@
+/**
+ * Changelog Viewer Styles
+ */
+
+.stellar-changelog-embed {
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #333;
+}
+
+.stellar-changelog-embed__pagination-info {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.stellar-changelog-embed__pagination-info .current-page {
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.stellar-changelog-embed__versions {
+    margin-bottom: 1rem;
+}
+
+/* Version container */
+.stellar-changelog-embed__version {
+    margin-bottom: .75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Version header */
+.stellar-changelog-embed__version-header {
+    padding: 0.75rem 20px;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stellar-changelog-embed__version-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.stellar-changelog-embed__version-date-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.stellar-changelog-embed__version-info .stellar-changelog-embed__version-title {
+    color: #1A202C;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.56px;
+    line-height: 42px;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+.stellar-changelog-embed__version-date {
+    color: #4A4A68;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4rem;
+}
+
+.stellar-changelog-embed__version-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.stellar-changelog-embed__version-tag--latest {
+    align-items: center;
+    background: #DCE1E8;
+    border-radius: 6px;
+    color: #333;
+    display: flex;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    gap: --ld-spacer-fixed-0;
+    letter-spacing: 1px;
+    line-height: 20px;
+    padding: 4px 8px;
+    text-transform: uppercase;
+}
+
+.stellar-changelog-embed__toggle, .stellar-changelog-embed__toggle:hover, .stellar-changelog-embed__toggle:focus {
+    all: unset;
+    border-radius: 4px;
+    border: transparent 2px solid;
+    color: #4A4A68;
+    cursor: pointer;
+    line-height: 1;
+    outline-offset: 2px;
+    outline-style: none;
+    outline-width: 2px;
+    padding: 0.5rem 8px;
+    transition: transform 0.2s;
+}
+
+.stellar-changelog-embed__toggle:hover {
+    background-color: #F3F8FF;
+    border-color: #235AF3;
+    color: #235AF3;
+}
+
+.stellar-changelog-embed__toggle:focus:not(:hover) {
+    background-color: #F3F8FF;
+    border-color: #0E2A90;
+    color: #0E2A90;
+    outline: none;
+}
+
+.stellar-changelog-embed__toggle:focus:hover {
+    background-color: transparent;
+    border-color: #235AF3;
+    color: #4A4A68;
+    outline-color: #f3f8ff;
+}
+
+.stellar-changelog-embed__toggle-icon {
+    color: #4A4A68;
+    display: block;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.stellar-changelog-embed__toggle-icon-svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.stellar-changelog-embed__toggle[aria-expanded="true"] .stellar-changelog-embed__toggle-icon-svg {
+    transform: rotate(180deg);
+}
+
+/* Version content */
+.stellar-changelog-embed__version-content {
+    padding: 1rem 32px;
+    background-color: #fff;
+}
+
+/* Sections (grouped by type) */
+.stellar-changelog-embed__section {
+    margin-bottom: 1.5rem;
+}
+
+.stellar-changelog-embed__section:last-child {
+    margin-bottom: 0;
+}
+
+.stellar-changelog-embed__section-header {
+    align-items: center;
+    border-bottom: 1px solid #DCE1E8;
+    color: #1A202C;
+    display: flex;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 2.25rem;
+    text-transform: capitalize;
+    gap: 0.5rem;
+    justify-content: space-between;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0.375rem 0;
+    user-select: none;
+}
+
+.stellar-changelog-embed__section-count {
+    align-items: center;
+    aspect-ratio: 1;
+    background-color: #F3F8FF;
+    border-radius: 50%;
+    color: #0E2A90;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: 1px;
+    line-height: 1;
+    min-width: 30px;
+    padding: 4px 8px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.stellar-changelog-embed__section-title {
+    color: #1A202C;
+    font-family: "Queens Trial";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 36px;
+    text-transform: capitalize;
+}
+
+/* Change list */
+.stellar-changelog-embed__changes {
+    list-style-type: none;
+
+    /* Theme overrides for generic .single-content ul-type styles */
+    margin: 0  !important;
+    padding: 0 !important; 
+}
+
+.stellar-changelog-embed__change {
+    color: #333;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.5px;
+    margin-bottom: 0.75rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.stellar-changelog-embed__change:last-child {
+    margin-bottom: 0;
+}
+
+.stellar-changelog-embed__change::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #a0aec0;
+}
+
+/* Error messages */
+.stellar-changelog-embed__error {
+    padding: 1rem;
+    border-left: 4px solid #ef4444;
+    background-color: #fee2e2;
+    color: #7f1d1d;
+    margin-bottom: 1rem;
+}
+
+/* Code formatting */
+.stellar-changelog-embed__change .stellar-changelog-embed__code {
+    background-color: #f1f5f9;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875em;
+    color: #be123c;
+    border: 1px solid #e2e8f0;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+/* Mobile responsive code blocks */
+@media (max-width: 768px) {
+    .stellar-changelog-embed__change code {
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+        white-space: normal;
+        word-break: break-all;
+    }
+}
+
+.stellar-changelog-embed__change .stellar-changelog-embed__code--multiline {
+    display: block;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+/* Bold and italic formatting */
+.stellar-changelog-embed__change strong {
+    font-weight: 600;
+}
+
+.stellar-changelog-embed__change em {
+    font-style: italic;
+}
+
+/* Editor specific styles */
+.stellar-changelog-embed__editor .stellar-changelog-embed__preview-note {
+    background-color: #f0f9ff;
+    border-left: 4px solid #0ea5e9;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    color: #0369a1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .stellar-changelog-embed__version-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .stellar-changelog-embed__pagination-controls {
+        gap: 0.75rem;
+    }
+
+    .stellar-changelog-embed__pagination-btn-container.stellar-changelog-embed__pagination-btn-container--number {
+        display: none;
+    }
+    
+    .stellar-changelog-embed__pagination-numbers {
+        order: -1;
+    }
+
+    .stellar-changelog-embed__version-date-container {
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+/* Pagination styles */
+.stellar-changelog-embed__pagination {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.stellar-changelog-embed__pagination .stellar-changelog-embed__pagination-info {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.stellar-changelog-embed__pagination-controls {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-left: 0 !important; /* Theme overrides */
+    padding-left: 0 !important;
+}
+
+.stellar-changelog-embed__pagination-controls li {
+	display: inline-block;
+	list-style-type: none;
+}
+
+.stellar-changelog-embed__pagination-btn {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.2s;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.stellar-changelog-embed__pagination-btn:hover:not(:disabled) {
+    background-color: #f9fafb;
+    border-color: #9ca3af;
+    color: #111827;
+}
+
+.stellar-changelog-embed__pagination-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+    color: #111827;
+}
+
+.stellar-changelog-embed__pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #9ca3af;
+}
+
+.stellar-changelog-embed__pagination-btn.active {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.stellar-changelog-embed__pagination-btn.active:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff !important;
+}
+
+/* Type-specific colors */
+.stellar-changelog-embed__section[data-type="Fix"] .stellar-changelog-embed__section-count {
+    background-color: #fecaca;
+    color: #7f1d1d;
+}
+
+.stellar-changelog-embed__section[data-type="Tweak"] .stellar-changelog-embed__section-count {
+    background-color: #bbf7d0;
+    color: #0f5132;
+}
+
+.stellar-changelog-embed__section[data-type="Feature"] .stellar-changelog-embed__section-count {
+    background-color: #c7d2fe;
+    color: #1e1b4b;
+}
+
+.stellar-changelog-embed__section[data-type="Security"] .stellar-changelog-embed__section-count {
+    background-color: #fde68a;
+    color: #78350f;
+}
